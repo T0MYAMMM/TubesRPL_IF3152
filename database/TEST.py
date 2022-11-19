@@ -1,4 +1,5 @@
 from __init__ import*
+from PIL import Image
 
-nama = input("Masukkan Nama Barang:")
-SearchNama(nama)
+im = Image.open("./pic/contoh.JPG")
+im.show()

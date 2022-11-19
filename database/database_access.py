@@ -74,6 +74,7 @@ def KurangBarang(Barang):
     #nama = Barang.nama
     sql = ("DELETE FROM barang WHERE nama = %s")
     nama = (Barang, )
+
     MyCursor.execute(sql, nama)
     MyDB.commit()
 
@@ -84,6 +85,7 @@ def EditKuantitas(Barang, Kuantitas):
         'amount'    : Kuantitas,
         'nama'      : Barang,
     }
+
     MyCursor.execute(sql, data_kuantitas)
     MyDB.commit()
 
@@ -96,5 +98,6 @@ def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
         'storage'   : Penyimpanan,
         'nama'      : Barang,
     }
+    
     MyCursor.execute(sql, data_informasi)
     MyDB.commit()

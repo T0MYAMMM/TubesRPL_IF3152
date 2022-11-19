@@ -15,7 +15,7 @@ label1 = Label(root, text="Apakah aku ganteng masseh?")
 from PIL import ImageTk,Image    
 canvas = Canvas(root, width = 600, height = 600)  
 canvas.pack()  
-img = ImageTk.PhotoImage(Image.open("C:/Users/Thomas Stefen M/Dropbox/My PC (LAPTOP-VVOKBOQQ)/Downloads/PROJEK GUI SEMBAKO/PROJEK GUI SEMBAKO/sample.jpg"))  
+img = ImageTk.PhotoImage(Image.open(".\sample.jpg"))  
 canvas.create_image(20, 20, anchor=NW, image=img)
 
 button3 = Button(root, text="Cium", command=lambda:command3()) #exit button
