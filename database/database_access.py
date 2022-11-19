@@ -84,5 +84,17 @@ def EditKuantitas(Barang, Kuantitas):
         'amount'    : Kuantitas,
         'nama'      : Barang,
     }
-    MyCursor.execute(sql,data_kuantitas)
+    MyCursor.execute(sql, data_kuantitas)
+    MyDB.commit()
+
+def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
+    #nama = Barang.nama
+    sql = ("UPDATE barang SET harga = %(price)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE nama = %(nama)s")
+    data_informasi = {
+        'price'     : Harga,
+        'supplier'  : Supplier,
+        'storage'   : Penyimpanan,
+        'nama'      : Barang,
+    }
+    MyCursor.execute(sql, data_informasi)
     MyDB.commit()
