@@ -90,7 +90,7 @@ class tambahBarang:
         self.inputCategoryLabel = Label(RightFrame, font=('arial', 15), text='Kategori:', padx=70, pady=0, bg='powder blue')
         self.inputCategoryLabel.grid(row=1, column=0, sticky=W)
         self.inputCategoryBox = ttk.Combobox(RightFrame, textvariable=productCategory, state='readonly', font=('arial', 15), width=20)
-        self.inputCategoryBox['value']=('sembako','obat','sabun','mainan')
+        self.inputCategoryBox['value']=('sembako','obat','sabun','mainan') #ini bisa dicustom tergantung kategorinya apa aja
         self.inputCategoryBox.grid(row=1, column=1)
 
         #Input Exp Date
