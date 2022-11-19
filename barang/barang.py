@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Barang:
 
     def __init__(self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan):
@@ -12,39 +14,32 @@ class Barang:
         self.penyimpanan = penyimpanan
 
     def get_nama(self):
-        print(self.nama)
         return self.nama
 
     def get_harga(self):
-        print(self.harga)
         return self.harga
 
     def get_gambar(self):
-        print(self.gambar)
         return self.gambar
 
     def get_ukuran(self):
-        print(self.ukuran)
         return self.ukuran
 
     def get_kuantitas(self):
-        print(self.kuantitas)
         return self.kuantitas
 
     def get_kategori(self):
-        print(self.kategori)
         return self.kategori
     
     def get_tanggalkadaluarsa(self):
-        print(self.tanggalkadaluarsa)
-        return self.tanggalkadaluarsa
+        date_str = self.tanggalkadaluarsa
+        date_object = datetime.strptime(date_str, '%Y/%m/%d').date()
+        return date_object
 
     def get_supplier(self):
-        print(self.supplier)
         return self.supplier
 
     def get_penyimpanan(self):
-        print(self.penyimpanan)
         return self.penyimpanan
 
     def set_nama(self, nama):

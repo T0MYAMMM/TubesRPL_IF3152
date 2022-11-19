@@ -1,5 +1,6 @@
 import mysql.connector
 import datetime
+from barang import*
 
 MyDB = mysql.connector.connect(
     host = "localhost",
@@ -11,6 +12,8 @@ MyDB = mysql.connector.connect(
 MyCursor = MyDB.cursor()
 
 def getData(Result):
+    ListBarang = []
+
     for row in Result:
         nama = row[1]
         harga = row[2]
@@ -22,8 +25,10 @@ def getData(Result):
         supplier = row[8]
         penyimpanan = row[9]
         
-        
-        ## CREATE OBJECT BARANG
+        barangx = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, penyimpanan)
+        ListBarang.append(barangx)
+    
+    return ListBarang
 
 def SearchNama(Nama):
     sql = "SELECT * FROM barang WHERE nama like %s"
@@ -31,7 +36,8 @@ def SearchNama(Nama):
     MyCursor.execute(sql, nama)
 
     MyResult = MyCursor.fetchall()
-    getData(MyResult)
+    Hasil = getData(MyResult)
+    return Hasil
     
 
 def SearchStokKosong():
@@ -39,7 +45,8 @@ def SearchStokKosong():
     MyCursor.execute(sql)
 
     MyResult = MyCursor.fetchall()
-    getData(MyResult)
+    Hasil = getData(MyResult)
+    return Hasil
 
 def SearchKategori(Kategori):
     sql = "SELECT * FROM barang WHERE nama like %s"
@@ -47,7 +54,8 @@ def SearchKategori(Kategori):
     MyCursor.execute(sql, kategori)
 
     MyResult = MyCursor.fetchall()
-    getData(MyResult)
+    Hasil = getData(MyResult)
+    return Hasil
 
 def TambahBarang(Barang):
     #using kelas barang
@@ -56,15 +64,15 @@ def TambahBarang(Barang):
            ", penyimpanan) VALUES (%(name)s, %(price)s, %(pict)s"
            ", %(size)s, %(amount)s, %(category)s, %(expdate)s, %(supp)s, %(storage)s)")
     data_barang = {
-        'name' : 'Beras 2KG',
-        'price' : 120000,
-        'pict' : 'D:\#Private Data\M.Dzaki\.kuliah\Semester 5\#MATKUL\IF3152 - RPL\CODE\contoh.JPG',
-        'size' : 5000,
-        'amount' : 13,
-        'category' : 'sembako',
-        'expdate' : datetime.datetime(2024,11,1),
-        'supp' : 'PT Beras Jaya',
-        'storage' : 'rak 3',
+        'name' : Barang.get_nama(),
+        'price' : Barang.get_harga(),
+        'pict' : Barang.get_gambar(),
+        'size' : Barang.get_ukuran(),
+        'amount' : Barang.get_kuantitas(),
+        'category' : Barang.get_kategori(),
+        'expdate' : Barang.get_tanggalkadaluarsa(),
+        'supp' : Barang.get_supplier(),
+        'storage' : Barang.get_penyimpanan(),
     }
 
     MyCursor.execute(sql, data_barang)
@@ -73,7 +81,7 @@ def TambahBarang(Barang):
 def KurangBarang(Barang):
     #nama = Barang.nama
     sql = ("DELETE FROM barang WHERE nama = %s")
-    nama = (Barang, )
+    nama = (Barang.get_nama(), )
 
     MyCursor.execute(sql, nama)
     MyDB.commit()
@@ -83,7 +91,7 @@ def EditKuantitas(Barang, Kuantitas):
     sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE nama = %(nama)s")
     data_kuantitas = {
         'amount'    : Kuantitas,
-        'nama'      : Barang,
+        'nama'      : Barang.get_nama(),
     }
 
     MyCursor.execute(sql, data_kuantitas)
@@ -96,8 +104,16 @@ def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
         'price'     : Harga,
         'supplier'  : Supplier,
         'storage'   : Penyimpanan,
-        'nama'      : Barang,
+        'nama'      : Barang.get_nama(),
     }
     
     MyCursor.execute(sql, data_informasi)
     MyDB.commit()
+
+def ViewAllData():
+    sql = "SELECT * FROM barang"
+    MyCursor.execute(sql)
+
+    MyResult = MyCursor.fetchall()
+    Hasil = getData(MyResult)
+    return Hasil

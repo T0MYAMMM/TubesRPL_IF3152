@@ -1,5 +1,9 @@
-from __init__ import*
-from PIL import Image
+from database_access import*
 
-im = Image.open("./pic/contoh.JPG")
-im.show()
+barang = Barang("kapal", 20000000, "./pic/contoh.JPG", 3500, 2, "kendaraan", "2022/10/05", "toko kapal mas Akmal", "dermaga labtek V")
+TambahBarang(barang)
+
+MyCursor.execute("SELECT * FROM barang")
+MyResult = MyCursor.fetchall()
+Hasil = getData(MyResult)
+print(Hasil)
