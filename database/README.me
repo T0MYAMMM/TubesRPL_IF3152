@@ -6,5 +6,70 @@ ACCESS TO DATABASE
         host, user, password, database 
 
 FUNGSI KE DATABASE
+
     - SearchNama
-        Mencari barang sesuai dengan nama inputnya 
+        Mencari barang sesuai dengan nama barang
+        Menghasilkan list barang hasil pencarian dengan seluruh atribut didalamnya
+        
+        CARA MENCARI BARANG:
+            nama barang = "Susu Keledai"
+
+            opsi input pencarian :
+                - "susu"
+                - "susu keledai"
+                - "keledai"
+                - etc
+    
+    - SearchStokKosong
+        Mencari barang dengan informasi stok kosong
+        Menghasilkan list barang hasil pencarian dengan seluruh atribut didalamnya
+
+        CARA MENCARI BARANG:
+            jalankan langsung fungsi
+
+    - SearchKategori
+        Mencari barang sesaui dengan kategori barang
+        Menghasilkan list barang hasil pencarian dengan seluruh atribut didalamnya
+
+        CARA MENCARI BARANG:
+            kategori barang = "minuman dingin"
+
+            opsi input pencarian :
+                - "minum"
+                - "minuman"
+                - "dingin"
+                - etc
+
+    - TambahBarang
+        Menambahkan object barang pada database
+
+        CARA MENAMBAHKAN BARANG:
+            buat suatu object Barang
+            ex: barangx = Barang()
+
+            input nama object Barang pada fungsi
+            ex: TambahBarang(barangx)
+
+    - KurangBarang
+        Menghapus object barang dari database
+
+        CARA MENGHAPUS BARANG:
+            ambil data object barang
+            input nama object pada fungsi
+    
+    - EditKuantitas
+        Melakukan pengeditan data kuantitas dari barang
+
+        CARA MENGEDIT KUANTITAS:
+            tulis kuantitas (x >=0)
+            input nama object dan kuantitas pada fungsi
+    
+    - EditInformasi
+        Melakukan pengeditan data harga, supplier, dan tempat penyimpanan dari barang
+
+        CARA MENGEDIT INFORMASI:
+            tulis harga, supplier, dan tempat penyimpanan yang baru
+            input nama object, harga, supplier, dan tempat penyimpanan pada fungsi
+
+    - ViewAllData
+        Melakukan pengambilan seluruh data barang dari database

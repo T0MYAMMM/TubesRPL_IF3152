@@ -3,6 +3,8 @@ import datetime
 from barang import*
 
 MyDB = mysql.connector.connect(
+    # menghubungkan program dengan database MySQL
+    # set host, user, password, database
     host = "localhost",
     user = "root",
     password = "",
@@ -12,6 +14,10 @@ MyDB = mysql.connector.connect(
 MyCursor = MyDB.cursor()
 
 def getData(Result):
+    # mengambil seluruh data hasil fech dari database
+    # mengubah data yang diambil menjadi object Barang
+    # memasukkan object Barang yang telah dibut ke dalam ListBarang
+    # menghasilkan output ListBarang berupa array of Barang
     ListBarang = []
 
     for row in Result:
@@ -31,6 +37,8 @@ def getData(Result):
     return ListBarang
 
 def SearchNama(Nama):
+    # melakukan pencarian barang berdasarkan nama barang yang disimpan
+    # memberikan return berupa array of barang
     sql = "SELECT * FROM barang WHERE nama like %s"
     nama = ("%" + Nama + "%", )
     MyCursor.execute(sql, nama)
@@ -41,6 +49,8 @@ def SearchNama(Nama):
     
 
 def SearchStokKosong():
+    # melakukan pencarian barang berdasarkan barang yang stoknya habis
+    # memberikan return berupa array of barang
     sql = "SELECT * FROM barang WHERE kuantitas = 0"
     MyCursor.execute(sql)
 
@@ -49,6 +59,8 @@ def SearchStokKosong():
     return Hasil
 
 def SearchKategori(Kategori):
+    # melakukan pencarian barang berdasarkan nama kategori dari barang yang disimpan
+    # memberikan return berupa array of barang
     sql = "SELECT * FROM barang WHERE nama like %s"
     kategori = ("%" + Kategori + "%", )
     MyCursor.execute(sql, kategori)
@@ -58,7 +70,9 @@ def SearchKategori(Kategori):
     return Hasil
 
 def TambahBarang(Barang):
-    #using kelas barang
+    # menambahkan object barang pada database
+    # input berupa object barang
+    # hasil akhir berupa object barang disimpan pada database
     sql = ("INSERT INTO barang (nama, harga, gambar, ukuran"
            ", kuantitas, kategori, tanggalkadaluarsa, supplier"
            ", penyimpanan) VALUES (%(name)s, %(price)s, %(pict)s"
@@ -79,7 +93,9 @@ def TambahBarang(Barang):
     MyDB.commit()
 
 def KurangBarang(Barang):
-    #nama = Barang.nama
+    # menghapus object barang dari database berdasarkan Barang yang ada
+    # melakukan penghapusan object berdasarkan nama dari barang
+    # hasil akhir berupa data object barang berhasil dihapus dari database
     sql = ("DELETE FROM barang WHERE nama = %s")
     nama = (Barang.get_nama(), )
 
@@ -87,18 +103,24 @@ def KurangBarang(Barang):
     MyDB.commit()
 
 def EditKuantitas(Barang, Kuantitas):
-    #nama = Barang.nama
-    sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE nama = %(nama)s")
-    data_kuantitas = {
-        'amount'    : Kuantitas,
-        'nama'      : Barang.get_nama(),
-    }
+    # melakukan pengeditan kuantitas barang
+    # kuantitas dapat bertambah maupun berkurang dengan prerequisite (kuantitas >= 0)
+    # hasil akhir berupa data kuantitas barang pada database berhasil diubah
+    if (Kuantitas >= 0):
+        sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE nama = %(nama)s")
+        data_kuantitas = {
+            'amount'    : Kuantitas,
+            'nama'      : Barang.get_nama(),
+        }
 
-    MyCursor.execute(sql, data_kuantitas)
-    MyDB.commit()
+        MyCursor.execute(sql, data_kuantitas)
+        MyDB.commit()
+    else:
+        return 0
 
 def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
-    #nama = Barang.nama
+    # melakukan pengeditan informasi harga, supplier, dan tempat penyimpanan barang
+    # hasil akhir berupa data harga, supplier, dan tempat penyimpanan barang pada database berhasil diubah
     sql = ("UPDATE barang SET harga = %(price)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE nama = %(nama)s")
     data_informasi = {
         'price'     : Harga,
@@ -111,6 +133,8 @@ def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
     MyDB.commit()
 
 def ViewAllData():
+    # mengambil seluruh data barang yang tersimpan pada database
+    # menghasilkan keluaran berupa array of barang
     sql = "SELECT * FROM barang"
     MyCursor.execute(sql)
 
