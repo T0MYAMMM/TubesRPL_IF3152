@@ -8,7 +8,7 @@ import tkinter.messagebox
 class hapusBarang:
     def __init__(self,root):
         self.root = root
-        self.root.title("Delete Product")
+        self.root.title("Grocery Store Search Engine")
         self.root.geometry("650x250+0+0")
         self.root.resizable(False,False)
         self.root.configure(background='white')
