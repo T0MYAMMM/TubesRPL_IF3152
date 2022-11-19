@@ -1,0 +1,91 @@
+class Barang:
+
+    def __init__(self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan):
+        self.nama = nama
+        self.harga = harga
+        self.gambar = gambar
+        self.ukuran = ukuran
+        self.kuantitas = kuantitas
+        self.kategori = kategori
+        self.tanggalkadaluarsa = tanggalkadaluarsa
+        self.supplier = supplier
+        self.penyimpanan = penyimpanan
+
+    def get_nama(self):
+        print(self.nama)
+        return self.nama
+
+    def get_harga(self):
+        print(self.harga)
+        return self.harga
+
+    def get_gambar(self):
+        print(self.gambar)
+        return self.gambar
+
+    def get_ukuran(self):
+        print(self.ukuran)
+        return self.ukuran
+
+    def get_kuantitas(self):
+        print(self.kuantitas)
+        return self.kuantitas
+
+    def get_kategori(self):
+        print(self.kategori)
+        return self.kategori
+    
+    def get_tanggalkadaluarsa(self):
+        print(self.tanggalkadaluarsa)
+        return self.tanggalkadaluarsa
+
+    def get_supplier(self):
+        print(self.supplier)
+        return self.supplier
+
+    def get_penyimpanan(self):
+        print(self.penyimpanan)
+        return self.penyimpanan
+
+    def set_nama(self, nama):
+        self.nama = nama
+
+    def set_harga(self, harga):
+        self.harga = harga
+
+    def set_gambar(self, gambar):
+        self.gambar = gambar
+
+    def set_ukuran(self, ukuran):
+        self.ukuran = ukuran
+
+    def set_kuantitas(self, kuantitas):
+        self.kuantitas = kuantitas
+
+    def set_kategori(self, kategori):
+        self.kategori = kategori
+
+    def set_tanggalkadaluarsa(self, tanggalkadaluarsa):
+        self.tanggalkadaluarsa = tanggalkadaluarsa
+
+    def set_supplier(self, supplier):
+        self.supplier = supplier
+
+    def set_penyimpanan(self, penyimpanan):
+        self.penyimpanan = penyimpanan
+
+    def print_all_attributes(self):
+        print(self.nama)
+        print(self.harga)
+        print(self.gambar)
+        print(self.ukuran)
+        print(self.kuantitas)
+        print(self.kategori)
+        print(self.tanggalkadaluarsa)
+        print(self.supplier)
+        print(self.penyimpanan)
+
+b1 = Barang("odol", 7000, "Odol.jpg", "Besar", 12, "Pasta Gigi", "11-19-2022", "PT INO", "Rak 4")
+b1.get_harga()
+b1.set_harga(12000)
+b1.print_all_attributes()
