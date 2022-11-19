@@ -1,4 +1,5 @@
 import mysql.connector
+import datetime
 
 MyDB = mysql.connector.connect(
     host = "localhost",
@@ -50,4 +51,38 @@ def SearchKategori(Kategori):
 
 def TambahBarang(Barang):
     #using kelas barang
-    
+    sql = ("INSERT INTO barang (nama, harga, gambar, ukuran"
+           ", kuantitas, kategori, tanggalkadaluarsa, supplier"
+           ", penyimpanan) VALUES (%(name)s, %(price)s, %(pict)s"
+           ", %(size)s, %(amount)s, %(category)s, %(expdate)s, %(supp)s, %(storage)s)")
+    data_barang = {
+        'name' : 'Beras 2KG',
+        'price' : 120000,
+        'pict' : 'D:\#Private Data\M.Dzaki\.kuliah\Semester 5\#MATKUL\IF3152 - RPL\CODE\contoh.JPG',
+        'size' : 5000,
+        'amount' : 13,
+        'category' : 'sembako',
+        'expdate' : datetime.datetime(2024,11,1),
+        'supp' : 'PT Beras Jaya',
+        'storage' : 'rak 3',
+    }
+
+    MyCursor.execute(sql, data_barang)
+    MyDB.commit()
+
+def KurangBarang(Barang):
+    #nama = Barang.nama
+    sql = ("DELETE FROM barang WHERE nama = %s")
+    nama = (Barang, )
+    MyCursor.execute(sql, nama)
+    MyDB.commit()
+
+def EditKuantitas(Barang, Kuantitas):
+    #nama = Barang.nama
+    sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE nama = %(nama)s")
+    data_kuantitas = {
+        'amount'    : Kuantitas,
+        'nama'      : Barang,
+    }
+    MyCursor.execute(sql,data_kuantitas)
+    MyDB.commit()
