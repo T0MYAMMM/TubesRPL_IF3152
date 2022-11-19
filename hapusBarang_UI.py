@@ -34,9 +34,9 @@ class hapusBarang:
         #Confirmation Button
         confirmationFrame = Frame(MainFrame, bg='white')
         confirmationFrame.grid(row=2, column=0)
-        yesButton = Button(confirmationFrame, padx=10, pady=10, font=('arial', 16, 'bold'), text='Ya', bg='red')
+        yesButton = Button(confirmationFrame, padx=10, pady=5, font=('arial', 16, 'bold'), text='Ya', bg='red')
         yesButton.pack(side='left', padx=20, pady=20, fill=BOTH)
-        noButton = Button(confirmationFrame, padx=10, pady=10, font=('arial', 16, 'bold'), text='Tidak', bg='cyan')
+        noButton = Button(confirmationFrame, padx=10, pady=5, font=('arial', 16, 'bold'), text='Tidak', bg='cyan')
         noButton.pack(side='right', padx=20, pady=20, fill=BOTH)
 
 

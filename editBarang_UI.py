@@ -5,7 +5,7 @@ import random
 import tkinter.messagebox
 #from pillow import image, imageTk
 
-class tambahBarang:
+class editBarang:
     def __init__(self,root):
         self.root = root
         self.root.title("Grocery Store Search Engine")
@@ -13,7 +13,7 @@ class tambahBarang:
         self.root.resizable(False,False)
         self.root.configure(background='powder blue')
 
-        #Frame Add Product
+        #Frame Edit Product
         MainFrame = Frame(self.root, bd=20, width=1280, height=650, bg='cadet blue', relief=RIDGE)
         MainFrame.pack(fill=BOTH)
 
@@ -26,7 +26,7 @@ class tambahBarang:
         #Add Product Label
         addProductFrame = Frame(LeftFrame, height=500, bg='powder blue')
         addProductFrame.grid(row=0, column=0)
-        addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text='Tambah Barang', bg='powder blue', pady=35)
+        addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text='Edit Barang', bg='powder blue', pady=35)
         addProduct.pack(padx=20, pady=20, fill=BOTH)
 
         #Variable
@@ -106,16 +106,16 @@ class tambahBarang:
         self.inputSupplierBox.grid(row=3, column=1)
 
         #Input Place
-        self.inputPlaceLabel = Label(RightFrame, font=('arial', 15), text='Penyimpanan:  ', padx=70, pady=60, bg='powder blue')
+        self.inputPlaceLabel = Label(RightFrame, font=('arial', 15), text='Penyimpanan:', padx=70, pady=60, bg='powder blue')
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(RightFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputPlaceBox.grid(row=4, column=1)
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red')
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Edit', bg='red')
         self.addButton.grid(row=5, column=1)
 
 if __name__ == "__main__":
     root = Tk()
-    application = tambahBarang(root)
+    application = editBarang(root)
     root.mainloop()
