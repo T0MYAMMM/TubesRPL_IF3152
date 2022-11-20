@@ -63,6 +63,6 @@ search_button.place(x = 980, y = 344)
 tambahBarang_button = Button(root, image = tambahBarangImg, bd = 0, highlightthickness=0)
 tambahBarang_button.place(x = 1020, y = 344)
 
-#login(root)
-#root.withdraw() #This hides the main window, it's still present it just can't be seen or interacted with
+login(root)
+root.withdraw() #This hides the main window, it's still present it just can't be seen or interacted with
 root.mainloop() #Starts the event loop for the main window
