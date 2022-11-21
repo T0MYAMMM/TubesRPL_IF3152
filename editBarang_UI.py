@@ -10,7 +10,6 @@ class editBarang:
         self.root = root
         self.root.title("Grocery Store Search Engine")
         self.root.geometry("1280x850+0+0")
-        self.root.resizable(False,False)
         self.root.configure(background='powder blue')
 
         #Frame Edit Product
@@ -26,7 +25,7 @@ class editBarang:
         #Add Product Label
         addProductFrame = Frame(LeftFrame, height=500, bg='powder blue')
         addProductFrame.grid(row=0, column=0)
-        addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text='Edit Barang', bg='powder blue', pady=35)
+        addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text='Edit Barang', bg='powder blue', pady=25)
         addProduct.pack(padx=20, pady=20, fill=BOTH)
 
         #Variable
@@ -83,7 +82,7 @@ class editBarang:
         RightFrame.pack(side='right', expand=True, fill=BOTH)
 
         #space
-        spaceFrame = Frame(RightFrame, height=155, bg='powder blue')
+        spaceFrame = Frame(RightFrame, height=125, bg='powder blue')
         spaceFrame.grid(row=0, column=0)
 
         #Input Category
