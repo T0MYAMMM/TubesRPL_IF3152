@@ -1,1 +1,1 @@
-.root
+import tkinter
