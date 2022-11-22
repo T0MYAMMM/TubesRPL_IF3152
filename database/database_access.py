@@ -7,7 +7,7 @@ MyDB = mysql.connector.connect(
     # set host, user, password, database
     host = "localhost",
     user = "root",
-    password = "",
+    password = "admin",
     database = "barang",
 )
 
@@ -45,6 +45,11 @@ def SearchNama(Nama):
 
     MyResult = MyCursor.fetchall()
     Hasil = getData(MyResult)
+    '''
+    print(nama)
+    for hasilnya in Hasil:
+        print(hasilnya.get_nama())
+    '''
     return Hasil
     
 
@@ -67,6 +72,9 @@ def SearchKategori(Kategori):
 
     MyResult = MyCursor.fetchall()
     Hasil = getData(MyResult)
+    #print(Kategori)
+    #for hasilnya in Hasil:
+    #    print(hasilnya.get_nama())
     return Hasil
 
 def TambahBarang(Barang):
@@ -92,14 +100,14 @@ def TambahBarang(Barang):
     MyCursor.execute(sql, data_barang)
     MyDB.commit()
 
-def KurangBarang(Barang):
+def HapusBarang(Barang, nama):
     # menghapus object barang dari database berdasarkan Barang yang ada
     # melakukan penghapusan object berdasarkan nama dari barang
     # hasil akhir berupa data object barang berhasil dihapus dari database
     sql = ("DELETE FROM barang WHERE nama = %s")
-    nama = (Barang.get_nama(), )
-
+    nama = ("%" + nama + "%")
     MyCursor.execute(sql, nama)
+    SimpanDatabase()
 
 def EditKuantitas(Barang, Kuantitas):
     # melakukan pengeditan kuantitas barang
@@ -113,6 +121,7 @@ def EditKuantitas(Barang, Kuantitas):
         }
 
         MyCursor.execute(sql, data_kuantitas)
+        SimpanDatabase()
     else:
         return 0
 

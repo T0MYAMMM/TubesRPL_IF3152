@@ -1,14 +1,37 @@
 from tkinter import * 
 import tkinter
-from login_test3 import login
+import ttkthemes
+from tkinter import ttk
+from login_test2 import login
 import sys 
 from PIL import ImageTk,Image
 from roundedbutton import RoundedButton
+
+#===IMPORT MODULE===#
+from barang import *
+from database import *
+from tambahBarang_UI import tambahBarang
+from editBarang_UI import editBarang
+
+
+#------function sementara------#
+def open_tambahbarang():
+    leaf = Toplevel()
+    new_window = tambahBarang(leaf)
+    leaf.configure(background='white')
+    width= 1280               
+    height= 720              
+    leaf.geometry("%dx%d+0+0" % (width, height))
+
+def print_list_barang(list_barang):
+    for x in list_barang:
+        x.print_all_attributes()
 
 def main_program():
     #============================KONFIGURASI============================#
     root = Tk() 
     root.configure(background='white')
+    root.title("Grocery Store Search Engine")
     width= root.winfo_screenwidth()               
     height= root.winfo_screenheight()               
     root.geometry("%dx%d+0+0" % (width, height))
@@ -22,6 +45,45 @@ def main_program():
     #FBBC05 YELLOW
     #34A853 GREEN
     #4285F4 BLUE
+
+    #==========================TAMPILAN PRODUK==========================#
+    def get_data_barang(barang, j):
+        if (j == 0):
+            return barang.get_nama()
+        elif (j == 1):
+            return barang.get_harga()
+        elif (j == 2):
+            return barang.get_kuantitas()
+
+    def get_list_barang(barang, i):
+        list_barang = (
+            #str(barang[i].get_nama()),
+            str(barang[i].get_harga()),
+            str(barang[i].get_ukuran()),
+            str(barang[i].get_kuantitas()),
+            str(barang[i].get_kategori()),
+            "ini tanggal",
+            str(barang[i].get_supplier()),
+            str(barang[i].get_penyimpanan()))
+        return list_barang
+
+    def view_SearchResult(list_barang, view):
+        clear_view(view_listBarang)
+        for i in range(len(list_barang)):
+            view.insert('', 'end', text=list_barang[i].get_nama(), values=get_list_barang(list_barang, i), tags=("row"))
+    
+    def view_Barang(listBarang, view):
+        for i in range(len(listBarang)):
+            view.insert('', 'end', text=listBarang[i].get_nama(), values=get_list_barang(listBarang, i), tags=("row"))
+
+    #===========================CLEAR DATA=============================# 
+    def clear_frame(nama_frame):
+        for widgets in nama_frame.winfo_children():
+            widgets.destroy()   
+
+    def clear_view(view):
+        for item in view.get_children():
+            view.delete(item)
 
     #=============================FRAME LABEL============================#
     canvas_logo = Canvas(frame_label, width = 71, height = 71, highlightthickness=0)
@@ -53,84 +115,123 @@ def main_program():
     
     searchImg =ImageTk.PhotoImage(searchImg_source)
     tambahBarangImg = ImageTk.PhotoImage(tambahBarang_source)
-    search_button = Button(frame_search, image = searchImg, bd = 0, highlightthickness=0)
-    #search_button.grid(row=1, column=4, padx=10, pady=20)
-    tambahBarang_button = Button(frame_search, image = tambahBarangImg, bd = 0, highlightthickness=0)
-    tambahBarang_button.grid(row=1, column=5, padx=10, pady=20)
+    search_button = Button(frame_search, width=50, height=50, image = searchImg, bg="white", bd = 0, highlightthickness=0, command = lambda : view_SearchResult(SearchNama(Search_Bar.get()), view_listBarang))
+    search_button.grid(row=1, column=4, padx=2, pady=20)
+    tambahBarang_button = Button(frame_search, width=50, height=50, image = tambahBarangImg, bg="white", bd = 0, highlightthickness=0, command = lambda : open_tambahbarang())
+    tambahBarang_button.grid(row=1, column=5, padx=2, pady=20)
 
     #=========================PRODUK KOSONG BUTTON======================#
     def searchEmptyProduct():
-        #root.destroy()   
-        #sys.exit()
+        view_SearchResult(SearchStokKosong(), view_listBarang)
         pass
-    sEP_button = RoundedButton(frame_search, width=250, height=60, text="CARI PRODUK KOSONG", size = 15, radius=25, bg='white',btnbackground="#FBBC05", btnforeground="#fff", clicked=searchEmptyProduct)
+    sEP_button = RoundedButton(frame_search, width=220, height=50, text="CARI PRODUK KOSONG", size = 12, radius=25, bg='white',btnbackground="#FBBC05", btnforeground="#fff", clicked=searchEmptyProduct)
     sEP_button.grid(row=2, column=0, columnspan=2)
 
     #==========================CARI KATEGORI=============================#
-    def searchCategory():
-        #root.destroy()   
-        #sys.exit()
-        pass
-    sC_button = RoundedButton(frame_search, width=200, height=60, text="CARI KATEGORI", size = 15, radius=25, bg='white',btnbackground="#34A853", btnforeground="#fff", clicked=searchCategory)
+
+    sC_button = RoundedButton(frame_search, width=200, height=50, text="CARI KATEGORI", size = 12, radius=25, bg='white',btnbackground="#34A853", btnforeground="#fff", clicked=lambda : view_SearchResult(SearchKategori(Search_Bar.get()), view_listBarang))
     sC_button.grid(row=2, column=2, columnspan=2)
 
 
     #=========================FRAME LIST BARANG==========================#  
     #LIST BARANG
-    listBarang = [
-                ["INDOMILK", 7000, "inigambar", 10, "minuman", "12/10/2022", "INDOMILK", "RAK1"], 
-                ["ADEM SARI", 5000, "inigambar", 4, "minuman", "12/10/2022", "TOKOOBAT", "RAK2"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"]
-                ]
+    listBarang = ViewAllData() 
+    
+    #THREEVIEW & SCROLLBAR    
+    scrollx = Scrollbar(root, orient=HORIZONTAL)
+    scrolly = Scrollbar(root, orient=VERTICAL)
+    scrollx.place(relx=.25, rely=.892, width=700, height=22)
+    scrolly.place(relx=.715, rely=.4, width=22, height=400)
 
-    #SUBJEK
-    label_namaBarang = Label(frame_listBarang, width = 12, text="Nama", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
-    label_hargaBarang = Label(frame_listBarang, width = 12, text="Harga", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
-    label_kuantitasBarang = Label(frame_listBarang, width = 12, text="Kuantitas", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
-    #label_storageBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
-    #label_supplierBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
+    view_listBarang = ttk.Treeview(root)
+    view_listBarang.place(relx=.25, rely=.4, width=700, height=400)
+    #view_listBarang.configure(style="style")
+    view_listBarang.configure(
+        columns=(
+            "Nama",
+            "Harga",
+            "Kuantitas",
+            "Ukuran",
+            "Kategori",
+            "Tgl Kadaluarsa",
+            "Supplier",
+            "Penyimpanan"
+        )
+    )
+    view_listBarang.configure(selectmode="browse")
+    view_listBarang.configure(yscrollcommand=scrolly.set, xscrollcommand=scrollx.set)
+    scrollx.configure(command=view_listBarang.xview)
+    scrolly.configure(command=view_listBarang.yview)
 
-    label_namaBarang.grid(row=0, column=0)
-    label_hargaBarang.grid(row=0, column=1)
-    label_kuantitasBarang.grid(row=0, column=2)
-    #label_storageBarang.grid(row=0, column=3, padx=10)
-    #label_supplierBarang.grid(row=0, column=3, padx=10)
-    #self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan
+    view_listBarang.tag_configure("font-style", font="Product_Sans")
+    view_listBarang.tag_bind("font-style")
 
-    #ENTITY
-    for i in range(len(listBarang)):
-        for j in range(3):
-            info = Label(frame_listBarang, text=listBarang[i][j], width = 12, font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
-            info.grid(row=i+1, column=j)
-        
-    #===============================SCROLLBAR==============================#
+    view_listBarang.heading("#0", text="Nama", anchor=CENTER)
+    view_listBarang.heading("#1", text="Harga", anchor=CENTER)
+    view_listBarang.heading("#2", text="Kuantitas", anchor=CENTER)
+    view_listBarang.heading("#3", text="Ukuran", anchor=CENTER)
+    view_listBarang.heading("#4", text="Kategori", anchor=CENTER)
+    view_listBarang.heading("#5", text="Kadaluarsa", anchor=CENTER)
+    view_listBarang.heading("#6", text="Supplier", anchor=CENTER)
+    view_listBarang.heading("#7", text="Penyimpanan", anchor=CENTER)
+    
 
-    v_s = Scrollbar(root)
-    v_s.pack(side=RIGHT, fill=Y)
+    view_listBarang.column("#0", stretch=NO, minwidth=100, width=300, anchor=W)
+    view_listBarang.column("#1", stretch=NO, minwidth=40, width=150, anchor=CENTER)
+    view_listBarang.column("#2", stretch=NO, minwidth=25, width=150, anchor=CENTER)
+    view_listBarang.column("#3", stretch=NO, minwidth=25, width=150, anchor=CENTER)
+    view_listBarang.column("#4", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#5", stretch=NO, minwidth=50, width=150, anchor=CENTER)
+    view_listBarang.column("#6", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#7", stretch=YES, minwidth=100, width=200, anchor=CENTER)
+    
+    style = ttkthemes.ThemedStyle(view_listBarang)
+    style.theme_use('clam')
+    style.configure('Threeview', font=("Product Sans", 12), cellpadding=19)
+    style.configure('Threeview.Heading', font=("Product Sans", 12, "bold"))
+    style.map("Threeview", background=[('selected', '#4285F4')], foreground=[('selected', '#fff')])
 
-    h_s = Scrollbar(root, orient='horizontal')
-    h_s.pack(side=BOTTOM, fill=X)
+    def deleteBarang(row_id):
+        #id = view_listBarang(row_id)[0]
 
-    #v_s.config(command=root.xview) #for horizontal scrollbar
-    #h_s.config(command=root.yview) #for vertical scrollbar   
+        view_listBarang.delete(row_id)
+
+    def open_infoBarang():
+        pass
+
+    def open_editbarang():
+        leaf = Toplevel()
+        new_window = editBarang(leaf)
+        leaf.configure(background='white')
+        width= 1280               
+        height= 720              
+        leaf.geometry("%dx%d+0+0" % (width, height))
+
+    def postPopUpMenu(event):
+        row_id = view_listBarang.identify_row(event.y)
+        view_listBarang.selection_set(row_id)
+        row_values = view_listBarang.item(row_id)['values']
+        print(row_values)
+        popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
+        popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=open_infoBarang)
+        popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=open_editbarang)
+        popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_id))
+        popUpMenu.post(event.x_root, event.y_root)
+
+    view_listBarang.tag_bind("row", "<Button-3>", lambda event: postPopUpMenu(event))
+
+    def handle_click(event):
+        if view_listBarang.identify_region(event.x, event.y) == "separator":
+            return "break"
+    view_listBarang.bind('<Button-1>', handle_click)    
+
+    
 
     #=============================EXIT BUTTON=============================#
     def exit():
         root.destroy()   
         sys.exit()
-    exit_button = RoundedButton(root, width=200, height=60, text="EXIT", radius=25, bg='white',btnbackground="#EA4335", btnforeground="#fff", clicked=exit)
+    exit_button = RoundedButton(frame_search, width=150, height=50, text="EXIT", size=12, radius=25, bg='white',btnbackground="#EA4335", btnforeground="#fff", clicked=exit)
     
 
     #================================PELETAKAN===============================# 
@@ -140,10 +241,12 @@ def main_program():
 
     #sEP_button.place(relx = .6, rely =.45)
     #sC_button.place(relx = .4, rely =.45)
-    exit_button.place(anchor = CENTER, relx = .1, rely =.8)
+    exit_button.grid(row=2,column=4, columnspan=2)
 
-    root.withdraw()
-    login(root)
+    #ENTITY
+    view_Barang(listBarang, view_listBarang)
+    #root.withdraw()
+    #login(root)
     root.mainloop() #Starts the event loop for the main window
 
 

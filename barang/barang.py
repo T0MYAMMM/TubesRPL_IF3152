@@ -34,6 +34,13 @@ class Barang:
     def get_tanggalkadaluarsa(self):
         date_str = self.tanggalkadaluarsa
         date_object = datetime.strptime(date_str, '%Y/%m/%d').date()
+        date_str = date_object
+        return date_object
+
+    def get_tanggalkadaluarsa2(self):
+        date_str = self.tanggalkadaluarsa
+        date_object = datetime.strptime(date_str, '%Y/%m/%d').date()
+        date_object.strftime('%m%d/%Y')
         return date_object
 
     def get_supplier(self):
@@ -80,7 +87,7 @@ class Barang:
         print(self.supplier)
         print(self.penyimpanan)
 
-# b1 = Barang("odol", 7000, "Odol.jpg", "Besar", 12, "Pasta Gigi", "11-19-2022", "PT INO", "Rak 4")
-# b1.get_harga()
-# b1.set_harga(12000)
-# b1.print_all_attributes()
+#b1 = Barang("odol", 7000, "Odol.jpg", "Besar", 12, "Pasta Gigi", "11-19-2022", "PT INO", "Rak 4")
+#tanggal = b1.get_tanggalkadaluarsa()
+#print(type(b1))
+#print(tanggal)
