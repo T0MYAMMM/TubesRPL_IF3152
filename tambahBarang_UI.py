@@ -3,7 +3,9 @@ from tkinter import ttk
 import tkinter as tk
 import random
 import tkinter.messagebox
-#from pillow import image, imageTk
+from PIL import Image, ImageTk
+
+from database import *
 
 class tambahBarang:
     def __init__(self,root):
@@ -38,6 +40,9 @@ class tambahBarang:
         productExpDate = StringVar()
         productSupplier = StringVar()
         productPlace = StringVar()
+
+        #Method
+
 
         #Input Name
         inputFrame = Frame(LeftFrame, height=500, bg='powder blue')
@@ -109,10 +114,31 @@ class tambahBarang:
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(RightFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputPlaceBox.grid(row=4, column=1)
+        
+        def getList():
+            list_barang = []
+            list_barang.append(productName.get())
+            list_barang.append(productPrice.get())
+            list_barang.append(productPicture.get())
+            list_barang.append(productSize.get())
+            list_barang.append(productQuantity.get())
+            list_barang.append(productCategory.get())
+            list_barang.append(productExpDate.get())
+            list_barang.append(productSupplier.get())
+            list_barang.append(productPlace.get()) 
+            return list_barang
+
+        """
+        def Tampil():
+            list = getList()
+            for i in list:
+                print(i)
+        """
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red')
-        self.addButton.grid(row=5, column=1)
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command = lambda: Ta)
+        self.addButton.grid(row=5, column=1)  
+        
 
 if __name__ == "__main__":
     root = Tk()
