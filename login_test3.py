@@ -12,7 +12,7 @@ def login(root):
     #================================Configure=====================================#
     window = Toplevel()
     window.title("Login form")
-    window.geometry('800x600')
+    window.geometry('750x500')
     window.configure(bg='white')
     frame = tkinter.Frame(window, bg='white')
 
