@@ -13,7 +13,7 @@ HOW TO RUN :
 cd TUBESRPL_IF3152
 python main.py or main.py
 
-3. Enter password = '123'
-4. If there's error finding image, try to change the 'logo', 'search', and other image path to complete local directory of this folder
+7. Enter password = '123'
+8. If there's error finding image, try to change the 'logo', 'search', and other image path to complete local directory of this folder
 
 ENJOY
