@@ -4,6 +4,24 @@ from login_test3 import login
 import sys 
 from PIL import ImageTk,Image
 
+#===IMPORT MODULE===#
+from barang import *
+from database import *
+from tambahBarang_UI import tambahBarang
+
+#------function sementara------#
+def open_tambahbarang():
+    leaf = Toplevel()
+    new_window = tambahBarang(leaf)
+    leaf.configure(background='white')
+    width= 1280               
+    height= 720              
+    leaf.geometry("%dx%d+0+0" % (width, height))
+
+def print_list_barang(list_barang):
+    for x in list_barang:
+        x.print_all_attributes()
+
 def main_program():
     #============================KONFIGURASI============================#
     root = Tk() 
@@ -51,9 +69,9 @@ def main_program():
     
     searchImg =ImageTk.PhotoImage(searchImg_source)
     tambahBarangImg = ImageTk.PhotoImage(tambahBarang_source)
-    search_button = Button(frame, image = searchImg, bd = 0, highlightthickness=0)
+    search_button = Button(frame, image = searchImg, bd = 0, highlightthickness=0, command = lambda : print_list_barang(SearchNama(Search_Bar.get())))
     search_button.grid(row=1, column=4, padx=10, pady=20)
-    tambahBarang_button = Button(frame, image = tambahBarangImg, bd = 0, highlightthickness=0)
+    tambahBarang_button = Button(frame, image = tambahBarangImg, bd = 0, highlightthickness=0, command = lambda : open_tambahbarang())
     tambahBarang_button.grid(row=1, column=5, padx=10, pady=20)
 
     #=========================FRAME LIST BARANG==========================#    
