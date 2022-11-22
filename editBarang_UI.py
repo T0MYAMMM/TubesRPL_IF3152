@@ -5,6 +5,8 @@ import random
 import tkinter.messagebox
 #from pillow import image, imageTk
 
+from database import *
+
 class editBarang:
     def __init__(self,root):
         self.root = root
@@ -111,7 +113,44 @@ class editBarang:
         self.inputPlaceBox.grid(row=4, column=1)
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Edit', bg='red')
+        def getList():
+            list_barang = []
+            list_barang.append(productName.get())
+            list_barang.append(productPrice.get())
+            list_barang.append(productPicture.get())
+            list_barang.append(productSize.get())
+            list_barang.append(productQuantity.get())
+            list_barang.append(productCategory.get())
+            list_barang.append(productExpDate.get())
+            list_barang.append(productSupplier.get())
+            list_barang.append(productPlace.get()) 
+            return list_barang
+
+        def create_barang():
+            data_baru = getList()
+            nama = data_baru[0]
+            harga = int(data_baru[1])
+            gambar = data_baru[2]
+            ukuran = int(data_baru[3])
+            kuantitas = int(data_baru[4])
+            kategori = data_baru[5]
+            tanggal = data_baru[6]
+            supplier = data_baru[7]
+            tempat = data_baru[8]
+            
+            barang_baru = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, tempat)
+
+            return barang_baru
+
+        """
+        def Tampil():
+            list = getList()
+            for i in list:
+                print(i)
+        """
+
+        #Add Button
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Edit', bg='red', command=lambda: EditInformasi(create_barang(), productPrice.get(), productQuantity.get(), productSupplier.get(), productPlace.get()))
         self.addButton.grid(row=5, column=1)
 
 if __name__ == "__main__":

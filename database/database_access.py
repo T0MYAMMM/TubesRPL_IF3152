@@ -61,7 +61,7 @@ def SearchStokKosong():
 def SearchKategori(Kategori):
     # melakukan pencarian barang berdasarkan nama kategori dari barang yang disimpan
     # memberikan return berupa array of barang
-    sql = "SELECT * FROM barang WHERE nama like %s"
+    sql = "SELECT * FROM barang WHERE kategori like %s"
     kategori = ("%" + Kategori + "%", )
     MyCursor.execute(sql, kategori)
 
@@ -116,18 +116,20 @@ def EditKuantitas(Barang, Kuantitas):
     else:
         return 0
 
-def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
+def EditInformasi(Barang, Harga, Kuantitas, Supplier, Penyimpanan):
     # melakukan pengeditan informasi harga, supplier, dan tempat penyimpanan barang
     # hasil akhir berupa data harga, supplier, dan tempat penyimpanan barang pada database berhasil diubah
-    sql = ("UPDATE barang SET harga = %(price)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE nama = %(nama)s")
+    sql = ("UPDATE barang SET harga = %(price)s, kuantitas = %(amount)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE nama = %(nama)s")
     data_informasi = {
         'price'     : Harga,
+        'amount'    : Kuantitas,
         'supplier'  : Supplier,
         'storage'   : Penyimpanan,
         'nama'      : Barang.get_nama(),
     }
     
     MyCursor.execute(sql, data_informasi)
+    MyDB.commit()
 
 def ViewAllData():
     # mengambil seluruh data barang yang tersimpan pada database

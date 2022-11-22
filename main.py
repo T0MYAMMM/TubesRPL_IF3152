@@ -9,6 +9,8 @@ from roundedbutton import RoundedButton
 from barang import *
 from database import *
 from tambahBarang_UI import tambahBarang
+from editBarang_UI import editBarang
+
 
 #------function sementara------#
 def open_tambahbarang():
@@ -42,6 +44,43 @@ def main_program():
     #34A853 GREEN
     #4285F4 BLUE
 
+    #==========================TAMPILAN PRODUK==========================#
+    def get_data_barang(barang, j):
+        if (j == 0):
+            return barang.get_nama()
+        elif (j == 1):
+            return barang.get_harga()
+        elif (j == 2):
+            return barang.get_kuantitas()
+
+    def tampilkan_produk(list_barang):
+        clear_frame(frame_listBarang)
+        label_namaBarang = Label(frame_listBarang, width = 12, text="Nama", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+        label_hargaBarang = Label(frame_listBarang, width = 12, text="Harga", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+        label_kuantitasBarang = Label(frame_listBarang, width = 12, text="Kuantitas", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+        #label_storageBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
+        #label_supplierBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
+
+        label_namaBarang.grid(row=0, column=0)
+        label_hargaBarang.grid(row=0, column=1)
+        label_kuantitasBarang.grid(row=0, column=2)
+
+        for i in range(len(list_barang)):
+            for j in range(3):
+                info = Label(frame_listBarang, text=get_data_barang(list_barang[i], j), width = 12, font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+                info.grid(row=i+1, column=j)
+    
+    def tampilkan_allBarang(listBarang):
+        for i in range(len(listBarang)):
+            for j in range(3):
+                info = Label(frame_listBarang, text=get_data_barang(listBarang[i], j), width = 12, font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+                info.grid(row=i+1, column=j)
+
+    #===========================CLEAR FRAME=============================# 
+    def clear_frame(nama_frame):
+        for widgets in nama_frame.winfo_children():
+            widgets.destroy()       
+
     #=============================FRAME LABEL============================#
     canvas_logo = Canvas(frame_label, width = 71, height = 71, highlightthickness=0)
     canvas_logo.grid(row=0, column=0, pady=40)
@@ -72,47 +111,33 @@ def main_program():
     
     searchImg =ImageTk.PhotoImage(searchImg_source)
     tambahBarangImg = ImageTk.PhotoImage(tambahBarang_source)
-    search_button = Button(frame_search, image = searchImg, bd = 0, highlightthickness=0, command = lambda : print_list_barang(SearchNama(Search_Bar.get())))
+    search_button = Button(frame_search, image = searchImg, bd = 0, highlightthickness=0, command = lambda : tampilkan_produk(SearchNama(Search_Bar.get())))
     search_button.grid(row=1, column=4, padx=10, pady=20)
     tambahBarang_button = Button(frame_search, image = tambahBarangImg, bd = 0, highlightthickness=0, command = lambda : open_tambahbarang())
     tambahBarang_button.grid(row=1, column=5, padx=10, pady=20)
 
     #=========================PRODUK KOSONG BUTTON======================#
     def searchEmptyProduct():
-        #root.destroy()   
-        #sys.exit()
+        tampilkan_produk(SearchStokKosong())
         pass
     sEP_button = RoundedButton(frame_search, width=250, height=60, text="CARI PRODUK KOSONG", size = 15, radius=25, bg='white',btnbackground="#FBBC05", btnforeground="#fff", clicked=searchEmptyProduct)
     sEP_button.grid(row=2, column=0, columnspan=2)
 
     #==========================CARI KATEGORI=============================#
-    def searchCategory():
-        #root.destroy()   
-        #sys.exit()
-        pass
-    sC_button = RoundedButton(frame_search, width=200, height=60, text="CARI KATEGORI", size = 15, radius=25, bg='white',btnbackground="#34A853", btnforeground="#fff", clicked=searchCategory)
+    def open_editbarang():
+        leaf = Toplevel()
+        new_window = editBarang(leaf)
+        leaf.configure(background='white')
+        width= 1280               
+        height= 720              
+        leaf.geometry("%dx%d+0+0" % (width, height))
+    sC_button = RoundedButton(frame_search, width=200, height=60, text="EDIT BARANG", size = 15, radius=25, bg='white',btnbackground="#34A853", btnforeground="#fff", clicked=open_editbarang)
     sC_button.grid(row=2, column=2, columnspan=2)
 
 
     #=========================FRAME LIST BARANG==========================#  
     #LIST BARANG
-    listBarang = [
-                ["INDOMILK", 7000, "inigambar", 10, "minuman", "12/10/2022", "INDOMILK", "RAK1"], 
-                ["ADEM SARI", 5000, "inigambar", 4, "minuman", "12/10/2022", "TOKOOBAT", "RAK2"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
-                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"]
-                ]
+    listBarang = ViewAllData() 
 
     #SUBJEK
     label_namaBarang = Label(frame_listBarang, width = 12, text="Nama", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
@@ -129,11 +154,8 @@ def main_program():
     #self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan
 
     #ENTITY
-    for i in range(len(listBarang)):
-        for j in range(3):
-            info = Label(frame_listBarang, text=listBarang[i][j], width = 12, font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
-            info.grid(row=i+1, column=j)
-        
+    tampilkan_allBarang(listBarang)
+    
     #===============================SCROLLBAR==============================#
 
     v_s = Scrollbar(root)
