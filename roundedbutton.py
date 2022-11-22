@@ -3,7 +3,7 @@ import tkinter as tk
 
 class RoundedButton(tk.Canvas):
 
-    def __init__(self, master=None, text:str="", radius=25, btnforeground="#000000", btnbackground="#ffffff", clicked=None, *args, **kwargs):
+    def __init__(self, master=None, text:str="", radius=25, btnforeground="#000000", btnbackground="#ffffff", size=18, clicked=None, *args, **kwargs):
         super(RoundedButton, self).__init__(master, *args, **kwargs)
         self.config(bg=self.master["bg"])
         self.btnbackground = btnbackground
@@ -13,7 +13,7 @@ class RoundedButton(tk.Canvas):
         #50, 50, 150, 100, radius=10, fill="#4285F4"
 
         self.rect = self.round_rectangle(50, 50, 150, 100, tags="button", radius=radius, fill=btnbackground)
-        self.text = self.create_text(0, 0, text=text, tags="button", fill=btnforeground, font=("Product Sans", 18, "bold"), justify="center")
+        self.text = self.create_text(0, 0, text=text, tags="button", fill=btnforeground, font=("Product Sans", size, "bold"), justify="center")
 
         self.tag_bind("button", "<ButtonPress>", self.border)
         self.tag_bind("button", "<ButtonRelease>", self.border)

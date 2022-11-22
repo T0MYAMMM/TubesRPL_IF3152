@@ -3,6 +3,7 @@ import tkinter
 from login_test3 import login
 import sys 
 from PIL import ImageTk,Image
+from roundedbutton import RoundedButton
 
 def main_program():
     #============================KONFIGURASI============================#
@@ -11,9 +12,10 @@ def main_program():
     width= root.winfo_screenwidth()               
     height= root.winfo_screenheight()               
     root.geometry("%dx%d+0+0" % (width, height))
-    frame = tkinter.Frame(root, bg='yellow')
-    frame_label = tkinter.Frame(root, bg="black")
-    frame_listBarang = tkinter.Frame(root,height=100, width=100, bg="blue")
+    frame_search = tkinter.Frame(root, bg='white')
+    frame_label = tkinter.Frame(root, bg="white")
+    frame_listBarang = tkinter.Frame(root,height=100, width=100, bg="white")
+    
     
     #===========================COLORPALETTE============================#
     #EA4335 RED
@@ -40,33 +42,105 @@ def main_program():
     canvas_logo.create_image(1, 1, anchor = NW, image=logo)
 
     #==========================FRAME SEARCH BAR==========================#
-    Search_Bar = Entry(frame, width = 25, font=('Product Sans',20), bg='white')
+    Search_Bar = Entry(frame_search, width = 30, font=('Product Sans',20), bg='white')
     Search_Bar.grid(row=1, column=0, columnspan=4, padx=20, pady=20)
 
     searchImg_source = Image.open("./search.jpg")
     searchImg_source = searchImg_source.resize((30,30))
-
     tambahBarang_source = Image.open("./TambahBarang_Button.png")
     tambahBarang_source = tambahBarang_source.resize((40,40))
 
     
     searchImg =ImageTk.PhotoImage(searchImg_source)
     tambahBarangImg = ImageTk.PhotoImage(tambahBarang_source)
-
-    search_button = Button(frame, image = searchImg, bd = 0, highlightthickness=0)
-    search_button.grid(row=1, column=4, padx=10, pady=20)
-
-    tambahBarang_button = Button(frame, image = tambahBarangImg, bd = 0, highlightthickness=0)
+    search_button = Button(frame_search, image = searchImg, bd = 0, highlightthickness=0)
+    #search_button.grid(row=1, column=4, padx=10, pady=20)
+    tambahBarang_button = Button(frame_search, image = tambahBarangImg, bd = 0, highlightthickness=0)
     tambahBarang_button.grid(row=1, column=5, padx=10, pady=20)
 
-    #=========================FRAME LIST BARANG==========================#    
-    label_barang1 = Label(frame_listBarang, text="Barang1", font=("Product Sans", 18))
-    label_barang1.grid(row=0, column=0)
+    #=========================PRODUK KOSONG BUTTON======================#
+    def searchEmptyProduct():
+        #root.destroy()   
+        #sys.exit()
+        pass
+    sEP_button = RoundedButton(frame_search, width=250, height=60, text="CARI PRODUK KOSONG", size = 15, radius=25, bg='white',btnbackground="#FBBC05", btnforeground="#fff", clicked=searchEmptyProduct)
+    sEP_button.grid(row=2, column=0, columnspan=2)
+
+    #==========================CARI KATEGORI=============================#
+    def searchCategory():
+        #root.destroy()   
+        #sys.exit()
+        pass
+    sC_button = RoundedButton(frame_search, width=200, height=60, text="CARI KATEGORI", size = 15, radius=25, bg='white',btnbackground="#34A853", btnforeground="#fff", clicked=searchCategory)
+    sC_button.grid(row=2, column=2, columnspan=2)
+
+
+    #=========================FRAME LIST BARANG==========================#  
+    #LIST BARANG
+    listBarang = [
+                ["INDOMILK", 7000, "inigambar", 10, "minuman", "12/10/2022", "INDOMILK", "RAK1"], 
+                ["ADEM SARI", 5000, "inigambar", 4, "minuman", "12/10/2022", "TOKOOBAT", "RAK2"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"],
+                ["BIMOLY 2L", 23000, "inigambar", 25, "bahan dapur", "12/10/2022", "BIMOLY", "RAK3"]
+                ]
+
+    #SUBJEK
+    label_namaBarang = Label(frame_listBarang, width = 12, text="Nama", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+    label_hargaBarang = Label(frame_listBarang, width = 12, text="Harga", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+    label_kuantitasBarang = Label(frame_listBarang, width = 12, text="Kuantitas", font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+    #label_storageBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
+    #label_supplierBarang = Label(frame_listBarang, text="Penyimpanan", font=("Product Sans", 18), bg="white")
+
+    label_namaBarang.grid(row=0, column=0)
+    label_hargaBarang.grid(row=0, column=1)
+    label_kuantitasBarang.grid(row=0, column=2)
+    #label_storageBarang.grid(row=0, column=3, padx=10)
+    #label_supplierBarang.grid(row=0, column=3, padx=10)
+    #self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan
+
+    #ENTITY
+    for i in range(len(listBarang)):
+        for j in range(3):
+            info = Label(frame_listBarang, text=listBarang[i][j], width = 12, font=("Product Sans", 18), bg="white", borderwidth=1, relief="solid")
+            info.grid(row=i+1, column=j)
+        
+    #===============================SCROLLBAR==============================#
+
+    v_s = Scrollbar(root)
+    v_s.pack(side=RIGHT, fill=Y)
+
+    h_s = Scrollbar(root, orient='horizontal')
+    h_s.pack(side=BOTTOM, fill=X)
+
+    #v_s.config(command=root.xview) #for horizontal scrollbar
+    #h_s.config(command=root.yview) #for vertical scrollbar   
+
+    #=============================EXIT BUTTON=============================#
+    def exit():
+        root.destroy()   
+        sys.exit()
+    exit_button = RoundedButton(root, width=200, height=60, text="EXIT", radius=25, bg='white',btnbackground="#EA4335", btnforeground="#fff", clicked=exit)
     
 
-    frame_label.place(anchor = CENTER, relx = .5, rely = .2)
-    frame.place(anchor = CENTER, relx = .5, rely = .4)
-    frame_listBarang.place(anchor = CENTER, relx = .5, rely = .6)
+    #================================PELETAKAN===============================# 
+    frame_label.place(anchor = CENTER, relx = .5, rely = .15)
+    frame_search.place(anchor = CENTER, relx = .5, rely = .3)
+    frame_listBarang.place(anchor = N, relx = .5, rely =.4)
+
+    #sEP_button.place(relx = .6, rely =.45)
+    #sC_button.place(relx = .4, rely =.45)
+    exit_button.place(anchor = CENTER, relx = .1, rely =.8)
 
     root.withdraw()
     login(root)

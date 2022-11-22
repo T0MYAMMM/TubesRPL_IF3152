@@ -1,1 +1,1 @@
-.place(anchor = CENTER, relx = .5, rely = .2)
+justify=LE

@@ -109,10 +109,46 @@ class tambahBarang:
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(RightFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputPlaceBox.grid(row=4, column=1)
-
+        
+        
+        def Tampil():
+            root = Toplevel()
+            hasil = productName.get()
+            print(productName.get())
+        
+            MainFrame = Frame(root, bd=20, width=1280, height=650, bg='cadet blue', relief=RIDGE)
+            MainFrame.pack(fill=BOTH)
+            addProductFrame = Frame(MainFrame, height=500, bg='powder blue')
+            addProductFrame.grid(row=0, column=0)
+            addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text = hasil, bg='powder blue', pady=25)
+            addProduct.pack(padx=20, pady=20, fill=BOTH)
+            
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red')
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=Tampil)
         self.addButton.grid(row=5, column=1)
+        
+
+        
+        
+        '''
+        def tampil(root, productName):
+
+
+            print(productName)
+            root  = Toplevel()
+        
+            #Frame Print Product
+            MainFrame = Frame(root, bd=20, width=1280, height=650, bg='cadet blue', relief=RIDGE)
+            MainFrame.pack(fill=BOTH)
+
+            #Product Name
+            addProductFrame = Frame(MainFrame, height=500, bg='powder blue')
+            addProductFrame.grid(row=0, column=0)
+            #print(productName.get())
+            addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text = productName, bg='powder blue', pady=25)
+            addProduct.pack(padx=20, pady=20, fill=BOTH)'''
+            
+        
 
 if __name__ == "__main__":
     root = Tk()
