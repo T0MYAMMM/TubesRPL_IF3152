@@ -100,7 +100,6 @@ def KurangBarang(Barang):
     nama = (Barang.get_nama(), )
 
     MyCursor.execute(sql, nama)
-    MyDB.commit()
 
 def EditKuantitas(Barang, Kuantitas):
     # melakukan pengeditan kuantitas barang
@@ -114,7 +113,6 @@ def EditKuantitas(Barang, Kuantitas):
         }
 
         MyCursor.execute(sql, data_kuantitas)
-        MyDB.commit()
     else:
         return 0
 
@@ -130,7 +128,6 @@ def EditInformasi(Barang, Harga, Supplier, Penyimpanan):
     }
     
     MyCursor.execute(sql, data_informasi)
-    MyDB.commit()
 
 def ViewAllData():
     # mengambil seluruh data barang yang tersimpan pada database
@@ -141,3 +138,8 @@ def ViewAllData():
     MyResult = MyCursor.fetchall()
     Hasil = getData(MyResult)
     return Hasil
+
+def SimpanDatabase():
+    # menyimpan data yang diubah/ditambahkan/dihapus dari/ke database
+    # melakukan commit() ke database
+    MyDB.commit()

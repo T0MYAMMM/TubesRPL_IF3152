@@ -80,7 +80,7 @@ class Barang:
         print(self.supplier)
         print(self.penyimpanan)
 
-b1 = Barang("odol", 7000, "Odol.jpg", "Besar", 12, "Pasta Gigi", "11-19-2022", "PT INO", "Rak 4")
-b1.get_harga()
-b1.set_harga(12000)
-b1.print_all_attributes()
+# b1 = Barang("odol", 7000, "Odol.jpg", "Besar", 12, "Pasta Gigi", "11-19-2022", "PT INO", "Rak 4")
+# b1.get_harga()
+# b1.set_harga(12000)
+# b1.print_all_attributes()

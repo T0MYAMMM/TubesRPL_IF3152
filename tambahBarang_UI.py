@@ -3,7 +3,9 @@ from tkinter import ttk
 import tkinter as tk
 import random
 import tkinter.messagebox
-#from pillow import image, imageTk
+from PIL import Image, ImageTk
+
+from database import *
 
 class tambahBarang:
     def __init__(self,root):
@@ -38,6 +40,9 @@ class tambahBarang:
         productExpDate = StringVar()
         productSupplier = StringVar()
         productPlace = StringVar()
+
+        #Method
+
 
         #Input Name
         inputFrame = Frame(LeftFrame, height=500, bg='powder blue')
@@ -109,47 +114,43 @@ class tambahBarang:
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(RightFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputPlaceBox.grid(row=4, column=1)
-        
-        
-        def Tampil():
-            root = Toplevel()
-            hasil = productName.get()
-            print(productName.get())
-        
-            MainFrame = Frame(root, bd=20, width=1280, height=650, bg='cadet blue', relief=RIDGE)
-            MainFrame.pack(fill=BOTH)
-            addProductFrame = Frame(MainFrame, height=500, bg='powder blue')
-            addProductFrame.grid(row=0, column=0)
-            addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text = hasil, bg='powder blue', pady=25)
-            addProduct.pack(padx=20, pady=20, fill=BOTH)
-            
+
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=Tampil)
-        self.addButton.grid(row=5, column=1)
-        
+        def getList():
+            list_barang = []
+            list_barang.append(productName.get())
+            list_barang.append(productPrice.get())
+            list_barang.append(productPicture.get())
+            list_barang.append(productSize.get())
+            list_barang.append(productQuantity.get())
+            list_barang.append(productCategory.get())
+            list_barang.append(productExpDate.get())
+            list_barang.append(productSupplier.get())
+            list_barang.append(productPlace.get()) 
+            return list_barang
 
-        
-        
-        '''
-        def tampil(root, productName):
-
-
-            print(productName)
-            root  = Toplevel()
-        
-            #Frame Print Product
-            MainFrame = Frame(root, bd=20, width=1280, height=650, bg='cadet blue', relief=RIDGE)
-            MainFrame.pack(fill=BOTH)
-
-            #Product Name
-            addProductFrame = Frame(MainFrame, height=500, bg='powder blue')
-            addProductFrame.grid(row=0, column=0)
-            #print(productName.get())
-            addProduct = Label(addProductFrame, width=20, font=('arial', 20, 'bold'), text = productName, bg='powder blue', pady=25)
-            addProduct.pack(padx=20, pady=20, fill=BOTH)'''
+        def create_barang():
+            data_baru = getList()
+            nama = data_baru[0]
+            harga = int(data_baru[1])
+            gambar = data_baru[2]
+            ukuran = int(data_baru[3])
+            kuantitas = int(data_baru[4])
+            kategori = data_baru[5]
+            tanggal = data_baru[6]
+            supplier = data_baru[7]
+            tempat = data_baru[8]
             
-        
+            barang_baru = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, tempat)
 
+            return barang_baru
+
+        """
+        def Tampil():
+            list = getList()
+            for i in list:
+                print(i)
+        """
 if __name__ == "__main__":
     root = Tk()
     application = tambahBarang(root)

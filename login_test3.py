@@ -6,7 +6,7 @@ from roundedbutton import *
 import sys
 
 #===============================PATH==================================#
-fn = 'C:/Users/Thomas Stefen M/Dropbox/My PC (LAPTOP-VVOKBOQQ)/Documents/Python Scripts/TUBESRPL_IF3152'
+# fn = 'C:/Users/Thomas Stefen M/Dropbox/My PC (LAPTOP-VVOKBOQQ)/Documents/Python Scripts/TUBESRPL_IF3152'
 
 def login(root):
     #================================Configure=====================================#
@@ -45,7 +45,7 @@ def login(root):
     canvas_logo.grid(row=0, column=0, pady=40)
     canvas_logo.configure(background='white')
 
-    logo_source = Image.open(fn+"/logo.png")
+    logo_source = Image.open("./logo.png")
     logo_source = logo_source.resize((70,70))
     logo = ImageTk.PhotoImage(logo_source)
 
