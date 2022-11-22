@@ -128,6 +128,22 @@ class tambahBarang:
             list_barang.append(productPlace.get()) 
             return list_barang
 
+        def create_barang():
+            data_baru = getList()
+            nama = data_baru[0]
+            harga = int(data_baru[1])
+            gambar = data_baru[2]
+            ukuran = int(data_baru[3])
+            kuantitas = int(data_baru[4])
+            kategori = data_baru[5]
+            tanggal = data_baru[6]
+            supplier = data_baru[7]
+            tempat = data_baru[8]
+            
+            barang_baru = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, tempat)
+
+            return barang_baru
+
         """
         def Tampil():
             list = getList()
@@ -136,7 +152,7 @@ class tambahBarang:
         """
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command = lambda: Ta)
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command = lambda: TambahBarang(create_barang()))
         self.addButton.grid(row=5, column=1)  
         
 

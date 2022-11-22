@@ -90,6 +90,7 @@ def TambahBarang(Barang):
     }
 
     MyCursor.execute(sql, data_barang)
+    MyDB.commit()
 
 def KurangBarang(Barang):
     # menghapus object barang dari database berdasarkan Barang yang ada
