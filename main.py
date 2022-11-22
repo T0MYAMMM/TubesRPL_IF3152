@@ -105,11 +105,15 @@ def main_program():
 
     #==========================FRAME SEARCH BAR==========================#
     Search_Bar = Entry(frame_search, width = 30, font=('Product Sans',20), bg='white')
-    #SB_source = Image.open("./TextBox_Search.png")
-    #SB_source = SB_source.resize(704,51)
-    #Search_Bar_Image = PhotoImage(SB_source)
-    #Search_Bar = Label(frame_search, image=Search_Bar_Image, border=0)
     Search_Bar.grid(row=1, column=0, columnspan=4, padx=20, pady=20)
+    #Search_Bar.bind('<Return>', lambda : view_SearchResult(SearchNama(Search_Bar.get()), view_listBarang))
+
+    def handler(e):
+        #label= Label(win, text= "You Pressed Enter")
+        #label.pack()
+        view_SearchResult(SearchNama(Search_Bar.get()), view_listBarang)
+    
+    root.bind('<Return>', handler)
 
     searchImg_source = Image.open("./search.jpg")
     searchImg_source = searchImg_source.resize((30,30))
@@ -119,8 +123,9 @@ def main_program():
     
     searchImg =ImageTk.PhotoImage(searchImg_source)
     tambahBarangImg = ImageTk.PhotoImage(tambahBarang_source)
-    search_button = Button(frame_search, width=50, height=50, image = searchImg, bg="white", bd = 0, highlightthickness=0, command = lambda : view_SearchResult(SearchNama(Search_Bar.get()), view_listBarang))
+    search_button = Button(frame_search, width=50, height=50,image = searchImg, bg="white", bd = 0, highlightthickness=0, command = lambda : view_SearchResult(SearchNama(Search_Bar.get()), view_listBarang))
     search_button.grid(row=1, column=4, padx=2, pady=20)
+    
     tambahBarang_button = Button(frame_search, width=50, height=50, image = tambahBarangImg, bg="white", bd = 0, highlightthickness=0, command = lambda : open_tambahbarang())
     tambahBarang_button.grid(row=1, column=5, padx=2, pady=20)
 
@@ -203,9 +208,9 @@ def main_program():
     def open_infoBarang():
         pass
 
-    def open_editbarang():
+    def open_editbarang(barang):
         leaf = Toplevel()
-        new_window = editBarang(leaf)
+        new_window = editBarang(leaf, barang)
         leaf.configure(background='white')
         width= 1280               
         height= 720              
@@ -215,10 +220,13 @@ def main_program():
         row_id = view_listBarang.identify_row(event.y)
         view_listBarang.selection_set(row_id)
         row_values = view_listBarang.item(row_id)['values']
+        #print(row_id)
+        #view_listBarang.item(row_id)["text"]
+        row_values.insert(0, view_listBarang.item(row_id)["text"])
         print(row_values)
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
         popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=open_infoBarang)
-        popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=open_editbarang)
+        popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
         popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_id))
         popUpMenu.post(event.x_root, event.y_root)
 
@@ -249,8 +257,8 @@ def main_program():
 
     #ENTITY
     view_Barang(listBarang, view_listBarang)
-    #root.withdraw()
-    #login(root)
+    root.withdraw()
+    login(root)
     root.mainloop() #Starts the event loop for the main window
 
 

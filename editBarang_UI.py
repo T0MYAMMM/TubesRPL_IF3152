@@ -2,13 +2,13 @@ from tkinter import*
 from tkinter import ttk
 import tkinter as tk
 import random
-import tkinter.messagebox
+from tkinter import messagebox
 #from pillow import image, imageTk
 
 from database import *
 
 class editBarang:
-    def __init__(self,root):
+    def __init__(self,root, barang):
         self.root = root
         self.root.title("Grocery Store Search Engine")
         self.root.geometry("1280x850+0+0")
@@ -47,12 +47,15 @@ class editBarang:
         self.inputNameLabel = Label(inputFrame, font=('arial', 15), text='Nama barang:', padx=70, pady=0, bg='powder blue')
         self.inputNameLabel.grid(row=0, column=0, sticky=W)
         self.inputNameBox = Entry(inputFrame, textvariable=productName, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputNameBox.insert(0, barang[0])
         self.inputNameBox.grid(row=0, column=1)
 
         #Input Price
         self.inputPriceLabel = Label(inputFrame, font=('arial', 15), text='Harga barang:', padx=70, pady=60, bg='powder blue')
         self.inputPriceLabel.grid(row=1, column=0, sticky=W)
         self.inputPriceBox = Entry(inputFrame, textvariable=productPrice, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputPriceBox.delete(0)
+        self.inputPriceBox.insert(0, barang[1])
         self.inputPriceBox.grid(row=1, column=1)
 
         #Input Picture
@@ -65,12 +68,16 @@ class editBarang:
         self.inputSizeLabel = Label(inputFrame, font=('arial', 15), text='Ukuran barang:', padx=70, pady=60, bg='powder blue')
         self.inputSizeLabel.grid(row=3, column=0, sticky=W)
         self.inputSizeBox = Entry(inputFrame, textvariable=productSize, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputSizeBox.delete(0)
+        self.inputSizeBox.insert(0, barang[2])
         self.inputSizeBox.grid(row=3, column=1)
 
         #Input Quantity
         self.inputQuantityLabel = Label(inputFrame, font=('arial', 15), text='Jumlah barang:', padx=70, pady=0, bg='powder blue')
         self.inputQuantityLabel.grid(row=4, column=0, sticky=W)
         self.inputQuantityBox = Entry(inputFrame, textvariable=productQuantity, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputQuantityBox.delete(0)
+        self.inputQuantityBox.insert(0, barang[3])
         self.inputQuantityBox.grid(row=4, column=1)
 
         #space
@@ -92,24 +99,28 @@ class editBarang:
         self.inputCategoryLabel.grid(row=1, column=0, sticky=W)
         self.inputCategoryBox = ttk.Combobox(RightFrame, textvariable=productCategory, state='readonly', font=('arial', 15), width=20)
         self.inputCategoryBox['value']=('sembako','obat','sabun','mainan') #ini bisa dicustom tergantung kategorinya apa aja
+        self.inputCategoryBox.insert(0, barang[4])
         self.inputCategoryBox.grid(row=1, column=1)
 
         #Input Exp Date
         self.inputExpDateLabel = Label(RightFrame, font=('arial', 15), text='Kadaluarsa:', padx=70, pady=60, bg='powder blue')
         self.inputExpDateLabel.grid(row=2, column=0, sticky=W)
         self.inputExpDateBox = Entry(RightFrame, textvariable=productExpDate, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputExpDateBox.insert(0, barang[5])
         self.inputExpDateBox.grid(row=2, column=1)
 
         #Input Supplier
         self.inputSupplierLabel = Label(RightFrame, font=('arial', 15), text='Supplier:', padx=70, pady=0, bg='powder blue')
         self.inputSupplierLabel.grid(row=3, column=0, sticky=W)
         self.inputSupplierBox = Entry(RightFrame, textvariable=productSupplier, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputSupplierBox.insert(0, barang[6])
         self.inputSupplierBox.grid(row=3, column=1)
 
         #Input Place
         self.inputPlaceLabel = Label(RightFrame, font=('arial', 15), text='Penyimpanan:', padx=70, pady=60, bg='powder blue')
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(RightFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
+        self.inputPlaceBox.insert(0, barang[7])
         self.inputPlaceBox.grid(row=4, column=1)
 
         #Add Button
@@ -149,11 +160,34 @@ class editBarang:
                 print(i)
         """
 
+        def editin_dong(Barang, Harga, Kuantitas, Supplier, Penyimpanan, root):
+            EditInformasi(Barang, Harga, Kuantitas, Supplier, Penyimpanan)
+            messagebox.showinfo(title="Edit Berhasil", message="Berhasil menyimpan perubahan informasi barang ke database.")
+            root.destroy()
+
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Edit', bg='red', command=lambda: EditInformasi(create_barang(), productPrice.get(), productQuantity.get(), productSupplier.get(), productPlace.get()))
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='SAVE', bg='red', command=lambda: editin_dong(create_barang(), productPrice.get(), productQuantity.get(), productSupplier.get(), productPlace.get(), root))
         self.addButton.grid(row=5, column=1)
+
 
 if __name__ == "__main__":
     root = Tk()
-    application = editBarang(root)
+    application = editBarang(root, barang)
+    application.inputNameBox.insert(0, barang[0])
+    application.inputPriceBox.insert(0, barang[1])
+    application.inputSizeBox.insert(0, barang[2])
+    application.inputQuantityBox.insert(0, barang[3])
+    application.inputCategoryBox.insert(0, barang[4])
+    application.inputExpDateBox.insert(0, barang[5])
+    application.inputSupplierBox.insert(0, barang[6])
+    application.inputPlaceBox.insert(0, barang[7])
+    
+    application.inputNameBox.bind("<FocusIn>", application.inputNameBox.delete(0,"end"))
+    application.inputPriceBox.bind("<FocusIn>", application.inputPriceBox.delete(0,"end"))
+    application.inputSizeBox.bind("<FocusIn>", application.inputSizeBox.delete(0,"end"))
+    application.inputQuantityBox.bind("<FocusIn>", application.inputQuantityBox.delete(0,"end"))
+    application.inputCategoryBox.bind("<FocusIn>", application.inputCategoryBox.delete(0,"end"))
+    application.inputExpDateBox.bind("<FocusIn>", application.inputExpDateBox.delete(0,"end"))
+    application.inputSupplierBox.bind("<FocusIn>", application.inputSupplierBox.delete(0,"end"))
+    application.inputPlaceBox.bind("<FocusIn>", application.inputPlaceBox.delete(0,"end"))
     root.mainloop()

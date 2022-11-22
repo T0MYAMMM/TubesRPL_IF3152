@@ -6,6 +6,7 @@ import tkinter.messagebox
 from PIL import Image, ImageTk
 
 from database import *
+from tkinter import messagebox
 
 class tambahBarang:
     def __init__(self,root):
@@ -151,9 +152,13 @@ class tambahBarang:
             for i in list:
                 print(i)
         """
+        def tambahin_dong(barang, root):
+            TambahBarang(barang)
+            messagebox.showinfo(title="Tambah Berhasil", message="Berhasil menambahkan barang ke database.")
+            root.destroy()
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=lambda: TambahBarang(create_barang()))
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=lambda: tambahin_dong(create_barang(), root))
         self.addButton.grid(row=5, column=1)
 
 if __name__ == "__main__":
