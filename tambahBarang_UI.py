@@ -153,7 +153,7 @@ class tambahBarang:
         """
 
         #Add Button
-        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=lambda: create_barang())
+        self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=lambda: TambahBarang(create_barang()))
         self.addButton.grid(row=5, column=1)
 
 if __name__ == "__main__":
