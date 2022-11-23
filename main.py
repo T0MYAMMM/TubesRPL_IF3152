@@ -175,7 +175,7 @@ def main_program():
     view_listBarang.tag_bind("font-style")
 
     view_listBarang.heading("#0", text="Nama", anchor=CENTER)
-    view_listBarang.heading("#1", text="ID Barang", anchor=CENTER)
+    view_listBarang.heading("#1", text="ID", anchor=CENTER)
     view_listBarang.heading("#2", text="Harga", anchor=CENTER)
     view_listBarang.heading("#3", text="Kuantitas", anchor=CENTER)
     view_listBarang.heading("#4", text="Ukuran", anchor=CENTER)
@@ -236,7 +236,6 @@ def main_program():
         #print(row_id)
         #view_listBarang.item(row_id)["text"]
         row_values.insert(0, view_listBarang.item(row_id)["text"])
-        #print(row_values)
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
         popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=lambda:open_infoBarang(row_values))
         popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
