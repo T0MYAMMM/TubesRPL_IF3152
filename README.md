@@ -5,7 +5,8 @@ SOFTWARE GROCERY STORE SEARCH ENGINE
 HOW TO RUN :
 1. Make sure you have installed Python3, TKINTER, and PILLOW
 2. Install and setting up MySQL
-3. Set your root user and set password = "" (empty password)
+3. Set your root user and set password = "" (empty password),
+    if not: change the password variable on database/database_access.py -> password = "YOUR_DESIRED_PASSWORD"
 4. Create database "barang" on your local device
 5. Import database from .database/barang.sql
 6. RUN file main.py :
