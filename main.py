@@ -215,7 +215,8 @@ def main_program():
         leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def open_infoBarang(barang):
-        detailBarang(barang)
+        root.withdraw()
+        detailBarang(barang, root)
 
     def open_editbarang(barang):
         leaf = Toplevel()

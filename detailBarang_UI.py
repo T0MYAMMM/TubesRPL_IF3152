@@ -6,6 +6,8 @@ from login_test2 import login
 import sys 
 from PIL import ImageTk,Image
 from roundedbutton import RoundedButton
+from tkinter import messagebox
+ 
 
 #===IMPORT MODULE===#
 from barang import *
@@ -14,7 +16,7 @@ from tambahBarang_UI import tambahBarang
 from editBarang_UI import editBarang
 
 #===================KONFIGURASI=================#
-def detailBarang(barang):
+def detailBarang(barang, root):
     window = Toplevel()
     window.title("ini scrollbar")
     window.geometry("1000x600")
@@ -55,9 +57,15 @@ def detailBarang(barang):
     #=======================FRAME INFORMASI 1-2=======================#
 
     nama_barang = barang[0]
+    gambar_barang = SearchNama(barang[0])[1]
+    ID_barang = barang[1]
     harga_barang = barang[2]
+    kuantitas_barang = barang[3]
     ukuran_barang = barang[4]
     kategori_barang = barang[5]
+    kadaluarsa_barang = barang[6]
+    supplier_barang = barang[7]
+    penyimpanan_barang = barang[8]
 
     label_nama_title = Label(informasi_frame1, text="Nama", font=("Product Sans", 15, "bold"), width=12, foreground='#EA4335', background="#fff")
     label_harga_title = Label(informasi_frame1, text="Harga", font=("Product Sans", 15, "bold"), width=12, foreground='#EA4335', background="#fff")
@@ -80,33 +88,49 @@ def detailBarang(barang):
     label_kategori.pack(padx=10, pady=5)
 
     #=======================FRAME INFORMASI 3=======================#
-    kuantitas_barang = barang[3]
     label_kuantitas = Label(informasi_frame3, text=kuantitas_barang, font=("Product Sans", 15), width=5, height=2, foreground='#EA4335', background="#fff")
     label_kuantitas.pack(padx=10,pady=10)
 
     def command_edit(barang):
-        editBarang(barang)
+        leaf = Toplevel()
+        new_window = editBarang(leaf, barang)
+        leaf.configure(background='white')
+        width= 700               
+        height= 850              
+        ws = leaf.winfo_screenwidth()
+        hs = leaf.winfo_screenheight()
+        x = (ws/2) - (width/2)
+        y = (hs/2) - (height/2)
+        leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def command_add(label_kuantitas, barang):
         #global kuantitas_barang = kuantitas_barang
         kuantitas_barang = barang[3]+1
         EditKuantitas(barang[1], kuantitas_barang)
         label_kuantitas.config(text=kuantitas_barang)
-        print("kontol")
         
     def command_subtract(label_kuantitas, barang):
         #global kuantitas_barang = kuantitas_barang
         kuantitas_barang = barang[3]-1
         EditKuantitas(barang[1], kuantitas_barang)
         label_kuantitas.config(text=kuantitas_barang)
-        
+
+    def command_exit(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan):
+        EditInformasi(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan)
+        messagebox.showinfo(title="Kembali", message="Berhasil menyimpan perubahan informasi barang ke database.")
+        window.destroy()
+        root.deiconify()
+
+
     edit_button = Button(informasi_frame3, text="Edit", font=("Product Sans", 15), width=20, foreground='#EA4335', background="#fff", command=lambda:command_edit(barang))
     add_button = Button(informasi_frame3, text="+", font=("Product Sans", 15, "bold"), height=1, foreground='#EA4335', background="#fff", command=lambda:command_add(label_kuantitas, barang))
     subtract_button = Button(informasi_frame3, text="-", font=("Product Sans", 15, "bold"),  height=1, foreground='#EA4335', background="#fff", command=lambda:command_subtract(label_kuantitas, barang))
+    back_button = Button(informasi_frame3, text="Save", font=("Product Sans", 15), width=20, foreground='#EA4335', background="#fff", command=lambda:command_exit(barang[1], harga_barang, kuantitas_barang, barang[7], barang[8]))
 
     edit_button.pack(padx=10,pady=10)
     add_button.pack(padx=10,pady=10)
     subtract_button.pack(padx=10,pady=10)
+    back_button.pack(padx=0, pady=10)
     add_button.place_configure(relx=.68, rely=.11)
     subtract_button.place_configure(relx=.21, rely=.11)
 

@@ -87,21 +87,22 @@ def detailBarang(barang):
     def command_edit(barang):
         editBarang(barang)
 
-    def command_add(label_kuantitas):
-        global kuantitas_barang
-        kuantitas_barang = kuantitas_barang+1
+    def command_add(label_kuantitas, barang):
+        #global kuantitas_barang = kuantitas_barang
+        kuantitas_barang = barang[3]+1
         EditKuantitas(barang[1], kuantitas_barang)
         label_kuantitas.config(text=kuantitas_barang)
+        print("kontol")
         
-    def command_subtract(label_kuantitas):
-        global kuantitas_barang
-        kuantitas_barang = kuantitas_barang-1
+    def command_subtract(label_kuantitas, barang):
+        #global kuantitas_barang = kuantitas_barang
+        kuantitas_barang = barang[3]-1
         EditKuantitas(barang[1], kuantitas_barang)
         label_kuantitas.config(text=kuantitas_barang)
         
     edit_button = Button(informasi_frame3, text="Edit", font=("Product Sans", 15), width=20, foreground='#EA4335', background="#fff", command=lambda:command_edit(barang))
-    add_button = Button(informasi_frame3, text="+", font=("Product Sans", 15, "bold"), height=1, foreground='#EA4335', background="#fff", command=lambda:command_add(label_kuantitas))
-    subtract_button = Button(informasi_frame3, text="-", font=("Product Sans", 15, "bold"),  height=1, foreground='#EA4335', background="#fff", command=lambda:command_subtract(label_kuantitas))
+    add_button = Button(informasi_frame3, text="+", font=("Product Sans", 15, "bold"), height=1, foreground='#EA4335', background="#fff", command=lambda:command_add(label_kuantitas, barang))
+    subtract_button = Button(informasi_frame3, text="-", font=("Product Sans", 15, "bold"),  height=1, foreground='#EA4335', background="#fff", command=lambda:command_subtract(label_kuantitas, barang))
 
     edit_button.pack(padx=10,pady=10)
     add_button.pack(padx=10,pady=10)
