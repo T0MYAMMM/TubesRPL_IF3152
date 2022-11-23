@@ -9,30 +9,25 @@ jobs:
     # Use root/example as user/password credentials
     version: '3.1'
 
-    services:
-
-      db:
-        image: mariadb
-        restart: always
-        environment:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: 
-          MYSQL_DATABASE: barang
-          MARIADB_ROOT_PASSWORD: example
-
-      adminer:
-        image: adminer
-        restart: always
-        ports:
-          - 8080:8080
+    env:
+      DB_DATABASE: barang
+      DB_USER: root
+      DB_PASSWORD: "root"
+      DB_HOST: localhost
 
   steps:
-  - uses: mirromutth/mysql-action@v1.1
-    with:
-      character set server: 'utf8' # Optional, default value is 'utf8mb4'. The '--character-set-server' option for mysqld
-      collation server: 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
-      mysql version: '8.0' # Optional, default value is "latest". The version of the MySQL
-      mysql database: 'barang' # Optional, default value is "test". The specified database which will be create
-      mysql root password: 'example' # Required if "mysql user" is empty, default is empty. The root superuser password
-      mysql user: 'root' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-      mysql password: # Required if "mysql user" exists. The password for the "mysql user"
+  - uses: actions/checkout@v2
+  - name: Install dependencies
+    run: |
+        python -m pip install --upgrade pip
+        pip install Pillow
+        pip install tkinter
+        pip install ttkthemes
+        pip install pytest
+        pip install mysql-connector-python
+  - name: MySQL set up
+    run: |
+        sudo /etc/init.d/mysql start
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }}; USE ${{ env.DB_DATABASE }}; SOURCE database/barang.sql;' -u${{ env.DB_USER }} -P${{ env.DB_PASSWORD }}
+  - name: Unit testing
+    run: pytest -o log_cli=true
