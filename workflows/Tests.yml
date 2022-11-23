@@ -28,6 +28,6 @@ jobs:
   - name: MySQL set up
     run: |
         sudo /etc/init.d/mysql start
-        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }}; USE ${{ env.DB_DATABASE }}; SOURCE database/barang.sql;' -u${{ env.DB_USER }} -P${{ env.DB_PASSWORD }}
+        mysql -e 'CREATE DATABASE ${{ env.DB_DATABASE }}; USE ${{ env.DB_DATABASE }}; SOURCE database/barang.sql; SOURCE database/data test/insert_data.sql;' -u${{ env.DB_USER }} -P${{ env.DB_PASSWORD }}
   - name: Unit testing
     run: pytest -o log_cli=true
