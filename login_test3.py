@@ -8,7 +8,7 @@ import sys
 #===============================PATH==================================#
 # fn = 'C:/Users/Thomas Stefen M/Dropbox/My PC (LAPTOP-VVOKBOQQ)/Documents/Python Scripts/TUBESRPL_IF3152'
 
-def login(root):
+def login(root, key):
     #================================Configure=====================================#
     window = Toplevel()
     window.title("Login form")
@@ -17,8 +17,8 @@ def login(root):
     frame = tkinter.Frame(window, bg='white')
 
     #==============================Validation Login================================#
-    def login():
-        password = "123"
+    def login_func(key):
+        password = key
         if password_entry.get()==password:
             messagebox.showinfo(title="Login Success", message="You successfully logged in.")
             window.destroy()
@@ -35,7 +35,7 @@ def login(root):
 
     #===============================Elements========================================#
     password_entry = tkinter.Entry(frame, show="*", font=("Product Sans", 16))
-    login_button = RoundedButton(frame, width=200, height=60, text="LOGIN", radius=25, bg='white', btnbackground="#4285F4", btnforeground="#fff", clicked=lambda:login())
+    login_button = RoundedButton(frame, width=200, height=60, text="LOGIN", radius=25, bg='white', btnbackground="#4285F4", btnforeground="#fff", clicked=lambda:login_func(key))
     exit_button = RoundedButton(frame, width=200, height=60, text="EXIT", radius=25, bg='white',btnbackground="#EA4335", btnforeground="#fff", clicked=exit)
     label_title = Label(frame, text='rocery ', font=("Product Sans", 30, 'bold'), bg='white', foreground='#4285F4')
     label_title2 = Label(frame, text='Store ', font=("Product Sans", 30, 'bold'), bg='white', foreground='#FBBC05')
