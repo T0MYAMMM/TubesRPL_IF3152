@@ -21,6 +21,20 @@ def detailBarang(barang, root):
     window.title("ini scrollbar")
     window.geometry("980x600")
 
+    #================VARIABEL===============#
+    nama_barang = barang[0]
+    gambar_barang = GetDataGambar(barang[1])
+    #gambar_barang = "gambar.png"
+    ID_barang = barang[1]
+    harga_barang = barang[2]
+    kuantitas_barang = barang[3]
+    ukuran_barang = barang[4]
+    kategori_barang = barang[5]
+    kadaluarsa_barang = barang[6]
+    supplier_barang = barang[7]
+    penyimpanan_barang = barang[8]
+
+    #==================CONFIG===============
     main_frame = Frame(window)
     main_frame.pack(fill=BOTH, expand=1)
 
@@ -42,7 +56,7 @@ def detailBarang(barang, root):
     third_frame.grid(row=0, column=1)
     canvas_gambar = Canvas(second_frame, width=324, height=324, background='blue')
 
-    img_source = Image.open("./sample.jpg")
+    img_source = Image.open(gambar_barang)
     img_source = img_source.resize((324,324), resample=1)
     gambar = ImageTk.PhotoImage(img_source)
     canvas_gambar.create_image(162,162, anchor = "center", image=gambar)
@@ -57,17 +71,7 @@ def detailBarang(barang, root):
     informasi_frame3.place(relx=.4, rely=.7)
 
     #=======================FRAME INFORMASI 1-2=======================#
-    nama_barang = barang[0]
-    gambar_barang = GetDataGambar(barang[1])
-    #gambar_barang = "gambar.png"
-    ID_barang = barang[1]
-    harga_barang = barang[2]
-    kuantitas_barang = barang[3]
-    ukuran_barang = barang[4]
-    kategori_barang = barang[5]
-    kadaluarsa_barang = barang[6]
-    supplier_barang = barang[7]
-    penyimpanan_barang = barang[8]
+    
 
     label_nama_title = Label(informasi_frame1, text="Nama", font=("Product Sans", 15, "bold"), width=14, foreground='#EA4335', background="#fff")
     label_harga_title = Label(informasi_frame1, text="Harga", font=("Product Sans", 15, "bold"), width=14, foreground='#EA4335', background="#fff")
@@ -81,11 +85,11 @@ def detailBarang(barang, root):
     label_nama = Label(informasi_frame2, text=nama_barang, font=("Product Sans", 15), width=35, foreground='#EA4335', background="#fff")
     label_harga = Label(informasi_frame2, text=harga_barang, font=("Product Sans", 15), width=35, foreground='#EA4335', background="#fff")
     label_ukuran = Label(informasi_frame2, text=ukuran_barang, font=("Product Sans", 15), width=35, foreground='#EA4335', background="#fff")
-    label_kuantitas = Label(informasi_frame2, text="Kuantitas", font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
+    label_kuantitas = Label(informasi_frame2, text=kuantitas_barang, font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
     label_kategori = Label(informasi_frame2, text=kategori_barang, font=("Product Sans", 15), width=35, foreground='#EA4335', background="#fff")
-    label_kadaluarsa = Label(informasi_frame2, text="Kadaluarsa", font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
-    label_supplier = Label(informasi_frame2, text="Supplier", font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
-    label_penyimpanan = Label(informasi_frame2, text="Lokasi", font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
+    label_kadaluarsa = Label(informasi_frame2, text=kadaluarsa_barang, font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
+    label_supplier = Label(informasi_frame2, text=supplier_barang, font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
+    label_penyimpanan = Label(informasi_frame2, text=penyimpanan_barang, font=("Product Sans", 15),  width=35, foreground='#EA4335', background="#fff")
 
     label_nama_title.pack(padx=10, pady=5)
     label_harga_title.pack(padx=10, pady=5)
