@@ -271,7 +271,7 @@ def main_program():
     #ENTITY
     view_Barang(listBarang, view_listBarang)
     root.withdraw()
-    key = "key"
+    key = "1234"
     login(root, key)
     root.mainloop() #Starts the event loop for the main window
 

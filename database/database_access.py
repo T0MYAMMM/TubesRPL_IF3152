@@ -7,7 +7,7 @@ MyDB = mysql.connector.connect(
     # set host, user, password, database
     host = "localhost",
     user = "root",
-    password = "admin",
+    password = "",
     database = "barang",
 )
 
