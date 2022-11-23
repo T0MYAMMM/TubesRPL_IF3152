@@ -57,8 +57,8 @@ def main_program():
         list_barang = (
             str(barang[i].get_idbarang()),
             str(barang[i].get_harga()),
-            str(barang[i].get_ukuran()),
             str(barang[i].get_kuantitas()),
+            str(barang[i].get_ukuran()),
             str(barang[i].get_kategori()),
             str(barang[i].get_tanggalkadaluarsa()),
             str(barang[i].get_supplier()),

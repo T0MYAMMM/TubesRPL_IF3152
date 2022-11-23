@@ -68,7 +68,7 @@ class editBarang:
         self.inputSupplierLabel.grid(row=3, column=0, sticky=W)
         self.inputSupplierBox = Entry(inputFrame, textvariable=productSupplier, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputSupplierBox.delete(0)
-        self.inputSupplierBox.insert(0, barang[3])
+        self.inputSupplierBox.insert(0, barang[7])
         self.inputSupplierBox.grid(row=3, column=1)
 
         #Input Place
@@ -76,7 +76,7 @@ class editBarang:
         self.inputPlaceLabel.grid(row=4, column=0, sticky=W)
         self.inputPlaceBox = Entry(inputFrame, textvariable=productPlace, font=('arial', 15), bd=8, width=20, fg='black', justify="left")
         self.inputPlaceBox.delete(0)
-        self.inputPlaceBox.insert(0, barang[3])
+        self.inputPlaceBox.insert(0, barang[8])
         self.inputPlaceBox.grid(row=4, column=1)
 
         #space
