@@ -1,0 +1,31 @@
+nama,harga,gambar,kuantitas,ukuran,kategori,"kadaluarsa ""YYYY/MM/DD""",supplier,penyimpanan
+Pepsodent,15000,.pic/pepsodent.jpg,150,100,sabun,2025/12/03,PT Hayang Kawin,rak 1
+Susu Dancow,40000,.pic/dancow.jpg,150,250,minuman,2023/10/04,PT Jaya Mundur,rak 4
+Pencil Staedtler,3500,.pic/pencil.jpg,55,1,alat tulis,2021/06/17,CV Tasik Enom,rak 9
+Mie Sedap,2500,.pic/popmie.jpg,100,250,makanan,2023/07/04,PT Wings Food,rak 2
+Pop mie,3000,.pic/popmie.jpg,80,150,makanan,2023/08/06,PT Garuda,rak 2
+Shizui,5000,.pic/shinzui.jpg,120,100,sabun,2025/12/07,PT Sukses Abadi,rak 1
+Lifebuoy,3000,.pic/lifebuoy.jpg,80,80,sabun,2025/08/25,PT Tisoledat,rak 1
+Sirup Marjan,21000,.pic/sirup marjan.jpg,27,1000,minuman,2023/11/04,CV Mas Kobis,rak 4
+Lays Rumput Afrika,2575000,.pic/laysrumput.jpg,0,2000000,barang terlarang,2099/10/07,PT Alakadarnya,rak sepatu
+Daging Ayam,32000,.pic/dagingayam.jpg,20,1,makanan,2022/12/01,PT ernakan,rak it
+Jantung Paus Biru,970000000,.pic/jantung.jpg,0,1,barang terlarang,2069/01/01,CV Pemburu Hati,rak es batu
+Kopi ABC,2000,.pic/kopiabc.jpg,30,20,minuman,2024/03/12,PT Tesla,rak 1
+Es Krim Kadal,2,.pic/eskrim.jpg,0,90,alat tulis,1999/09/09,Notaris Bu Broto,rak iglo
+Susu Bebelac,50000,.pic/bebelac.jpg,90,300,minuman,2025/04/23,PT Kaltim,rak narok
+Kopi Luwak,2000,.pic/kopiluwak.jpg,40,30,minuman,2024/03/24,PT Indofood,rak 4
+Indomie,2000,.pic/indomie.jpg,150,250,makanan,2024/05/21,PT Indofood,rak 1
+Telur T-rex,1000000000,.pic/telurtrex.jpg,1,2000,makanan,1000/01/01,PT Mama T-rex,rak 8
+Sunlight,5000,.pic/sunlight.jpg,40,250,sabun,2030/12/04,PT Wings,rak 3
+Mama Lemon,5000,.pic/mamalemon.jpg,50,250,sabun,2030/11/04,PT Soap,rak 3
+Fiesta,30000,.pic/fiesta.jpg,20,300,makanan,2023/08/11,PT Fiesta Food,rak 1
+Sutra,20000,.pic/sutra.jpg,50,43,barang terlarang,2025/12/09,PT Kain Sutra,rak 5
+Mie Gacoan,10000,.pic/miegacoan.jpg,150,34,makanan,2022/12/01,PT Gocean,rak 1
+Susu kambing,15000,.pic/susukambing.jpg,20,250,minuman,2022/11/27,PT ernakan,rak 3
+Nextar,2000,.pic/nextar.jpg,80,50,makanan,2024/09/23,PT Nextar,rak 1
+Beng beng,2000,.pic/bengbeng.jpg,50,50,makanan,2024/06/19,PT Indofood,rak 1
+Salak,5000,.pic/salak.jpg,30,1,Buah,2022/12/28,PT Kebunku Penuh dengan Bunga,rak 6
+Apel,34000,.pic/apel.jpg,30,1,Buah,2022/12/20,PT Kebunku Penuh dengan Bunga,rak 6
+Khuldi,1000000,.pic/khuldi.jpg,1,1,Buah,1000/01/23,PT Syurga,rak 6
+Beras Miskin,8000,.pic/beras.jpg,70,1,Sembako,2023/01/15,PT Sawah,rak 7
+Anggur Merah,40000,.pic/anggur.jpg,30,1,Buah,2022/12/30,PT Kebunku Penuh dengan Bunga,rak 6
