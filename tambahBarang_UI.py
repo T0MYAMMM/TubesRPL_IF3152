@@ -142,7 +142,7 @@ class tambahBarang:
             supplier = data_baru[7]
             tempat = data_baru[8]
             
-            barang_baru = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, tempat)
+            barang_baru = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, tempat, 0)
 
             return barang_baru
 

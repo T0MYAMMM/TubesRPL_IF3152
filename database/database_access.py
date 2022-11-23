@@ -7,7 +7,7 @@ MyDB = mysql.connector.connect(
     # set host, user, password, database
     host = "localhost",
     user = "root",
-    password = "admin",
+    password = "",
     database = "barang",
 )
 
@@ -21,6 +21,7 @@ def getData(Result):
     ListBarang = []
 
     for row in Result:
+        idbarang = row[0]
         nama = row[1]
         harga = row[2]
         gambar = row[3]
@@ -31,7 +32,7 @@ def getData(Result):
         supplier = row[8]
         penyimpanan = row[9]
         
-        barangx = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, penyimpanan)
+        barangx = Barang(nama, harga, gambar, ukuran, kuantitas, kategori, tanggal, supplier, penyimpanan, idbarang)
         ListBarang.append(barangx)
     
     return ListBarang
@@ -114,10 +115,10 @@ def EditKuantitas(Barang, Kuantitas):
     # kuantitas dapat bertambah maupun berkurang dengan prerequisite (kuantitas >= 0)
     # hasil akhir berupa data kuantitas barang pada database berhasil diubah
     if (Kuantitas >= 0):
-        sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE nama = %(nama)s")
+        sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE idbarang = %(id)s")
         data_kuantitas = {
             'amount'    : Kuantitas,
-            'nama'      : Barang.get_nama(),
+            'id'      : Barang.get_idbarang(),
         }
 
         MyCursor.execute(sql, data_kuantitas)
@@ -128,13 +129,13 @@ def EditKuantitas(Barang, Kuantitas):
 def EditInformasi(Barang, Harga, Kuantitas, Supplier, Penyimpanan):
     # melakukan pengeditan informasi harga, supplier, dan tempat penyimpanan barang
     # hasil akhir berupa data harga, supplier, dan tempat penyimpanan barang pada database berhasil diubah
-    sql = ("UPDATE barang SET harga = %(price)s, kuantitas = %(amount)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE nama = %(nama)s")
+    sql = ("UPDATE barang SET harga = %(price)s, kuantitas = %(amount)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE idbarang = %(id)s")
     data_informasi = {
         'price'     : Harga,
         'amount'    : Kuantitas,
         'supplier'  : Supplier,
         'storage'   : Penyimpanan,
-        'nama'      : Barang.get_nama(),
+        'id'      : Barang.get_idbarang(),
     }
     
     MyCursor.execute(sql, data_informasi)

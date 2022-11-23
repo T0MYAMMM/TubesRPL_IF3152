@@ -57,7 +57,7 @@ def main_program():
 
     def get_list_barang(barang, i):
         list_barang = (
-            #str(barang[i].get_nama()),
+            str(barang[i].get_idbarang()),
             str(barang[i].get_harga()),
             str(barang[i].get_ukuran()),
             str(barang[i].get_kuantitas()),
@@ -158,6 +158,7 @@ def main_program():
     view_listBarang.configure(
         columns=(
             "Nama",
+            "ID Barang",
             "Harga",
             "Kuantitas",
             "Ukuran",
@@ -176,13 +177,14 @@ def main_program():
     view_listBarang.tag_bind("font-style")
 
     view_listBarang.heading("#0", text="Nama", anchor=CENTER)
-    view_listBarang.heading("#1", text="Harga", anchor=CENTER)
-    view_listBarang.heading("#2", text="Kuantitas", anchor=CENTER)
-    view_listBarang.heading("#3", text="Ukuran", anchor=CENTER)
-    view_listBarang.heading("#4", text="Kategori", anchor=CENTER)
-    view_listBarang.heading("#5", text="Kadaluarsa", anchor=CENTER)
-    view_listBarang.heading("#6", text="Supplier", anchor=CENTER)
-    view_listBarang.heading("#7", text="Penyimpanan", anchor=CENTER)
+    view_listBarang.heading("#1", text="ID Barang", anchor=CENTER)
+    view_listBarang.heading("#2", text="Harga", anchor=CENTER)
+    view_listBarang.heading("#3", text="Kuantitas", anchor=CENTER)
+    view_listBarang.heading("#4", text="Ukuran", anchor=CENTER)
+    view_listBarang.heading("#5", text="Kategori", anchor=CENTER)
+    view_listBarang.heading("#6", text="Kadaluarsa", anchor=CENTER)
+    view_listBarang.heading("#7", text="Supplier", anchor=CENTER)
+    view_listBarang.heading("#8", text="Penyimpanan", anchor=CENTER)
     
 
     view_listBarang.column("#0", stretch=NO, minwidth=100, width=300, anchor=W)

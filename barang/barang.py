@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Barang:
 
-    def __init__(self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan):
+    def __init__(self,nama, harga, gambar, ukuran, kuantitas, kategori, tanggalkadaluarsa, supplier, penyimpanan, id):
         self.nama = nama
         self.harga = harga
         self.gambar = gambar
@@ -12,6 +12,7 @@ class Barang:
         self.tanggalkadaluarsa = tanggalkadaluarsa
         self.supplier = supplier
         self.penyimpanan = penyimpanan
+        self.idbarang = id
 
     def get_nama(self):
         return self.nama
@@ -48,6 +49,9 @@ class Barang:
 
     def get_penyimpanan(self):
         return self.penyimpanan
+    
+    def get_idbarang(self):
+        return self.idbarang
 
     def set_nama(self, nama):
         self.nama = nama
