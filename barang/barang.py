@@ -33,16 +33,7 @@ class Barang:
         return self.kategori
     
     def get_tanggalkadaluarsa(self):
-        date_str = self.tanggalkadaluarsa
-        date_object = datetime.strptime(date_str, '%Y/%m/%d').date()
-        date_str = date_object
-        return date_object
-
-    def get_tanggalkadaluarsa2(self):
-        date_str = self.tanggalkadaluarsa
-        date_object = datetime.strptime(date_str, '%Y/%m/%d').date()
-        date_object.strftime('%m%d/%Y')
-        return date_object
+        return self.tanggalkadaluarsa
 
     def get_supplier(self):
         return self.supplier

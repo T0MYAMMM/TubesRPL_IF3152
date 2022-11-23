@@ -6,14 +6,15 @@ from login_test2 import login
 import sys 
 from PIL import ImageTk,Image
 from roundedbutton import RoundedButton
-from detailBarang_UI import detailBarang
+
 
 #===IMPORT MODULE===#
 from barang import *
 from database import *
 from tambahBarang_UI import tambahBarang
 from editBarang_UI import editBarang
-
+from detailBarang_UI import detailBarang
+from hapusBarang_UI import hapusBarang
 
 #------function sementara------#
 def open_tambahbarang():
@@ -22,7 +23,11 @@ def open_tambahbarang():
     leaf.configure(background='white')
     width= 1280               
     height= 720              
-    leaf.geometry("%dx%d+0+0" % (width, height))
+    ws = leaf.winfo_screenwidth()
+    hs = leaf.winfo_screenheight()
+    x = (ws/2) - (width/2)
+    y = (hs/2) - (height/2)
+    leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
 def print_list_barang(list_barang):
     for x in list_barang:
@@ -48,14 +53,6 @@ def main_program():
     #4285F4 BLUE
 
     #==========================TAMPILAN PRODUK==========================#
-    def get_data_barang(barang, j):
-        if (j == 0):
-            return barang.get_nama()
-        elif (j == 1):
-            return barang.get_harga()
-        elif (j == 2):
-            return barang.get_kuantitas()
-
     def get_list_barang(barang, i):
         list_barang = (
             str(barang[i].get_idbarang()),
@@ -63,7 +60,7 @@ def main_program():
             str(barang[i].get_ukuran()),
             str(barang[i].get_kuantitas()),
             str(barang[i].get_kategori()),
-            "ini tanggal",
+            str(barang[i].get_tanggalkadaluarsa()),
             str(barang[i].get_supplier()),
             str(barang[i].get_penyimpanan()))
         return list_barang
@@ -189,13 +186,14 @@ def main_program():
     
 
     view_listBarang.column("#0", stretch=NO, minwidth=100, width=300, anchor=W)
-    view_listBarang.column("#1", stretch=NO, minwidth=40, width=150, anchor=CENTER)
+    view_listBarang.column("#1", stretch=NO, minwidth=40, width=100, anchor=CENTER)
     view_listBarang.column("#2", stretch=NO, minwidth=25, width=150, anchor=CENTER)
     view_listBarang.column("#3", stretch=NO, minwidth=25, width=150, anchor=CENTER)
-    view_listBarang.column("#4", stretch=NO, minwidth=100, width=200, anchor=CENTER)
-    view_listBarang.column("#5", stretch=NO, minwidth=50, width=150, anchor=CENTER)
-    view_listBarang.column("#6", stretch=NO, minwidth=100, width=200, anchor=CENTER)
-    view_listBarang.column("#7", stretch=YES, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#4", stretch=NO, minwidth=25, width=150, anchor=CENTER)
+    view_listBarang.column("#5", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#6", stretch=NO, minwidth=50, width=150, anchor=CENTER)
+    view_listBarang.column("#7", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#8", stretch=YES, minwidth=100, width=200, anchor=CENTER)
     
     style = ttkthemes.ThemedStyle(view_listBarang)
     style.theme_use('clam')
@@ -203,10 +201,18 @@ def main_program():
     style.configure('Threeview.Heading', font=("Product Sans", 12, "bold"))
     style.map("Threeview", background=[('selected', '#4285F4')], foreground=[('selected', '#fff')])
 
-    def deleteBarang(row_id):
+    def deleteBarang(barang):
         #id = view_listBarang(row_id)[0]
-
-        view_listBarang.delete(row_id)
+        leaf = Toplevel()
+        new_window = hapusBarang(leaf, barang)
+        leaf.configure(background='white')
+        width= 650               
+        height= 250
+        ws = leaf.winfo_screenwidth()
+        hs = leaf.winfo_screenheight()
+        x = (ws/2) - (width/2)
+        y = (hs/2) - (height/2)
+        leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def open_infoBarang(barang):
         detailBarang(barang)
@@ -215,9 +221,13 @@ def main_program():
         leaf = Toplevel()
         new_window = editBarang(leaf, barang)
         leaf.configure(background='white')
-        width= 1280               
-        height= 720              
-        leaf.geometry("%dx%d+0+0" % (width, height))
+        width= 700               
+        height= 850              
+        ws = leaf.winfo_screenwidth()
+        hs = leaf.winfo_screenheight()
+        x = (ws/2) - (width/2)
+        y = (hs/2) - (height/2)
+        leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def postPopUpMenu(event):
         row_id = view_listBarang.identify_row(event.y)
@@ -230,7 +240,7 @@ def main_program():
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
         popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=lambda:open_infoBarang(row_values))
         popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
-        popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_id))
+        popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_values))
         popUpMenu.post(event.x_root, event.y_root)
 
     view_listBarang.tag_bind("row", "<Button-3>", lambda event: postPopUpMenu(event))
