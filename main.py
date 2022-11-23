@@ -47,13 +47,6 @@ def main_program():
     #4285F4 BLUE
 
     #==========================TAMPILAN PRODUK==========================#
-    def get_data_barang(barang, j):
-        if (j == 0):
-            return barang.get_nama()
-        elif (j == 1):
-            return barang.get_harga()
-        elif (j == 2):
-            return barang.get_kuantitas()
 
     def get_list_barang(barang, i):
         list_barang = (
@@ -62,7 +55,7 @@ def main_program():
             str(barang[i].get_ukuran()),
             str(barang[i].get_kuantitas()),
             str(barang[i].get_kategori()),
-            "ini tanggal",
+            str(barang[i].get_tanggalkadaluarsa()),
             str(barang[i].get_supplier()),
             str(barang[i].get_penyimpanan()))
         return list_barang
@@ -177,7 +170,7 @@ def main_program():
     view_listBarang.tag_bind("font-style")
 
     view_listBarang.heading("#0", text="Nama", anchor=CENTER)
-    view_listBarang.heading("#1", text="ID Barang", anchor=CENTER)
+    view_listBarang.heading("#1", text="ID", anchor=CENTER)
     view_listBarang.heading("#2", text="Harga", anchor=CENTER)
     view_listBarang.heading("#3", text="Kuantitas", anchor=CENTER)
     view_listBarang.heading("#4", text="Ukuran", anchor=CENTER)
@@ -188,13 +181,14 @@ def main_program():
     
 
     view_listBarang.column("#0", stretch=NO, minwidth=100, width=300, anchor=W)
-    view_listBarang.column("#1", stretch=NO, minwidth=40, width=150, anchor=CENTER)
+    view_listBarang.column("#1", stretch=NO, minwidth=40, width=100, anchor=CENTER)
     view_listBarang.column("#2", stretch=NO, minwidth=25, width=150, anchor=CENTER)
     view_listBarang.column("#3", stretch=NO, minwidth=25, width=150, anchor=CENTER)
-    view_listBarang.column("#4", stretch=NO, minwidth=100, width=200, anchor=CENTER)
-    view_listBarang.column("#5", stretch=NO, minwidth=50, width=150, anchor=CENTER)
-    view_listBarang.column("#6", stretch=NO, minwidth=100, width=200, anchor=CENTER)
-    view_listBarang.column("#7", stretch=YES, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#4", stretch=NO, minwidth=25, width=150, anchor=CENTER)
+    view_listBarang.column("#5", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#6", stretch=NO, minwidth=50, width=150, anchor=CENTER)
+    view_listBarang.column("#7", stretch=NO, minwidth=100, width=200, anchor=CENTER)
+    view_listBarang.column("#8", stretch=YES, minwidth=100, width=200, anchor=CENTER)
     
     style = ttkthemes.ThemedStyle(view_listBarang)
     style.theme_use('clam')
@@ -214,8 +208,8 @@ def main_program():
         leaf = Toplevel()
         new_window = editBarang(leaf, barang)
         leaf.configure(background='white')
-        width= 1280               
-        height= 720              
+        width= 700               
+        height= 850              
         leaf.geometry("%dx%d+0+0" % (width, height))
 
     def postPopUpMenu(event):

@@ -126,7 +126,7 @@ def EditKuantitas(Barang, Kuantitas):
     else:
         return 0
 
-def EditInformasi(Barang, Harga, Kuantitas, Supplier, Penyimpanan):
+def EditInformasi(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan):
     # melakukan pengeditan informasi harga, supplier, dan tempat penyimpanan barang
     # hasil akhir berupa data harga, supplier, dan tempat penyimpanan barang pada database berhasil diubah
     sql = ("UPDATE barang SET harga = %(price)s, kuantitas = %(amount)s, supplier = %(supplier)s, penyimpanan = %(storage)s WHERE idbarang = %(id)s")
@@ -135,7 +135,7 @@ def EditInformasi(Barang, Harga, Kuantitas, Supplier, Penyimpanan):
         'amount'    : Kuantitas,
         'supplier'  : Supplier,
         'storage'   : Penyimpanan,
-        'id'      : Barang.get_idbarang(),
+        'id'      : ID_Barang,
     }
     
     MyCursor.execute(sql, data_informasi)

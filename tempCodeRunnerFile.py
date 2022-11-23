@@ -1,1 +1,1 @@
-editbarang
+barang
