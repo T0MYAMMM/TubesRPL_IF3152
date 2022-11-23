@@ -6,6 +6,7 @@ from login_test2 import login
 import sys 
 from PIL import ImageTk,Image
 from roundedbutton import RoundedButton
+from detailBarang_UI import detailBarang
 
 #===IMPORT MODULE===#
 from barang import *
@@ -207,8 +208,8 @@ def main_program():
 
         view_listBarang.delete(row_id)
 
-    def open_infoBarang():
-        pass
+    def open_infoBarang(barang):
+        detailBarang(barang)
 
     def open_editbarang(barang):
         leaf = Toplevel()
@@ -225,9 +226,9 @@ def main_program():
         #print(row_id)
         #view_listBarang.item(row_id)["text"]
         row_values.insert(0, view_listBarang.item(row_id)["text"])
-        print(row_values)
+        #print(row_values)
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
-        popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=open_infoBarang)
+        popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=lambda:open_infoBarang(row_values))
         popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
         popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_id))
         popUpMenu.post(event.x_root, event.y_root)
