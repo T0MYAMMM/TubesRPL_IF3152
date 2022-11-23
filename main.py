@@ -12,7 +12,7 @@ from barang import *
 from database import *
 from tambahBarang_UI import tambahBarang
 from editBarang_UI import editBarang
-
+from hapusBarang_UI import hapusBarang
 
 #------function sementara------#
 def open_tambahbarang():
@@ -21,7 +21,11 @@ def open_tambahbarang():
     leaf.configure(background='white')
     width= 1280               
     height= 720              
-    leaf.geometry("%dx%d+0+0" % (width, height))
+    ws = leaf.winfo_screenwidth()
+    hs = leaf.winfo_screenheight()
+    x = (ws/2) - (width/2)
+    y = (hs/2) - (height/2)
+    leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
 def print_list_barang(list_barang):
     for x in list_barang:
@@ -196,10 +200,18 @@ def main_program():
     style.configure('Threeview.Heading', font=("Product Sans", 12, "bold"))
     style.map("Threeview", background=[('selected', '#4285F4')], foreground=[('selected', '#fff')])
 
-    def deleteBarang(row_id):
+    def deleteBarang(barang):
         #id = view_listBarang(row_id)[0]
-
-        view_listBarang.delete(row_id)
+        leaf = Toplevel()
+        new_window = hapusBarang(leaf, barang)
+        leaf.configure(background='white')
+        width= 650               
+        height= 250
+        ws = leaf.winfo_screenwidth()
+        hs = leaf.winfo_screenheight()
+        x = (ws/2) - (width/2)
+        y = (hs/2) - (height/2)
+        leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def open_infoBarang():
         pass
@@ -210,7 +222,11 @@ def main_program():
         leaf.configure(background='white')
         width= 700               
         height= 850              
-        leaf.geometry("%dx%d+0+0" % (width, height))
+        ws = leaf.winfo_screenwidth()
+        hs = leaf.winfo_screenheight()
+        x = (ws/2) - (width/2)
+        y = (hs/2) - (height/2)
+        leaf.geometry("%dx%d+%d+%d" % (width, height, x, y))
 
     def postPopUpMenu(event):
         row_id = view_listBarang.identify_row(event.y)
@@ -222,7 +238,7 @@ def main_program():
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
         popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=open_infoBarang)
         popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
-        popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_id))
+        popUpMenu.add_command(label="Delete", accelerator="Delete", command=lambda: deleteBarang(row_values))
         popUpMenu.post(event.x_root, event.y_root)
 
     view_listBarang.tag_bind("row", "<Button-3>", lambda event: postPopUpMenu(event))

@@ -37,6 +37,11 @@ def getData(Result):
     
     return ListBarang
 
+def SimpanDatabase():
+    # menyimpan data yang diubah/ditambahkan/dihapus dari/ke database
+    # melakukan commit() ke database
+    MyDB.commit()
+
 def SearchNama(Nama):
     # melakukan pencarian barang berdasarkan nama barang yang disimpan
     # memberikan return berupa array of barang
@@ -101,16 +106,16 @@ def TambahBarang(Barang):
     MyCursor.execute(sql, data_barang)
     MyDB.commit()
 
-def HapusBarang(Barang, nama):
-    # menghapus object barang dari database berdasarkan Barang yang ada
-    # melakukan penghapusan object berdasarkan nama dari barang
+def HapusBarang(idbarang):
+    # menghapus object barang dari database berdasarkan idBarang yang ada
+    # melakukan penghapusan object berdasarkan ID dari barang
     # hasil akhir berupa data object barang berhasil dihapus dari database
-    sql = ("DELETE FROM barang WHERE nama = %s")
-    nama = ("%" + nama + "%")
-    MyCursor.execute(sql, nama)
+    sql = ("DELETE FROM barang WHERE idbarang = %s")
+    id_barang = (idbarang, )
+    MyCursor.execute(sql, id_barang)
     SimpanDatabase()
 
-def EditKuantitas(Barang, Kuantitas):
+def EditKuantitas(idbarang, Kuantitas):
     # melakukan pengeditan kuantitas barang
     # kuantitas dapat bertambah maupun berkurang dengan prerequisite (kuantitas >= 0)
     # hasil akhir berupa data kuantitas barang pada database berhasil diubah
@@ -118,7 +123,7 @@ def EditKuantitas(Barang, Kuantitas):
         sql = ("UPDATE barang SET kuantitas = %(amount)s WHERE idbarang = %(id)s")
         data_kuantitas = {
             'amount'    : Kuantitas,
-            'id'      : Barang.get_idbarang(),
+            'id'      : idbarang,
         }
 
         MyCursor.execute(sql, data_kuantitas)
@@ -150,8 +155,3 @@ def ViewAllData():
     MyResult = MyCursor.fetchall()
     Hasil = getData(MyResult)
     return Hasil
-
-def SimpanDatabase():
-    # menyimpan data yang diubah/ditambahkan/dihapus dari/ke database
-    # melakukan commit() ke database
-    MyDB.commit()
