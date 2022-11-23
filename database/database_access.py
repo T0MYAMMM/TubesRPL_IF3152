@@ -155,3 +155,14 @@ def ViewAllData():
     MyResult = MyCursor.fetchall()
     Hasil = getData(MyResult)
     return Hasil
+
+def GetDataGambar(idbarang):
+    sql = ("SELECT gambar FROM barang where idbarang = %s")
+    id_barang = (idbarang, )
+
+    MyCursor.execute(sql, id_barang)
+    MyResult = MyCursor.fetchall()
+
+    for row in MyResult:
+        gambar = row[0]
+    return gambar
