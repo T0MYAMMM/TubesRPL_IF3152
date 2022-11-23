@@ -219,7 +219,6 @@ def main_program():
         #print(row_id)
         #view_listBarang.item(row_id)["text"]
         row_values.insert(0, view_listBarang.item(row_id)["text"])
-        print(row_values)
         popUpMenu = tkinter.Menu(view_listBarang, tearoff=0, font=("Product Sans", 11))
         popUpMenu.add_command(label="Lihat Informasi Detail", accelerator="Ctrl+L", command=open_infoBarang)
         popUpMenu.add_command(label="Edit/Update", accelerator="Ctrl+E", command=lambda:open_editbarang(row_values))
