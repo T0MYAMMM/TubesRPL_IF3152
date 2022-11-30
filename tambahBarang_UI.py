@@ -153,9 +153,13 @@ class tambahBarang:
                 print(i)
         """
         def tambahin_dong(barang, root):
-            TambahBarang(barang)
-            messagebox.showinfo(title="Tambah Berhasil", message="Berhasil menambahkan barang ke database.")
-            root.destroy()
+            if (barang.get_kuantitas() < 0):
+                messagebox.showinfo(title="Gagal Menambah Barang", message="Masukan jumlah barang Anda tidak valid.")
+                root.destroy()
+            else:
+                TambahBarang(barang)
+                messagebox.showinfo(title="Tambah Berhasil", message="Berhasil menambahkan barang ke database.")
+                root.destroy()
 
         #Add Button
         self.addButton = Button(RightFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='Tambah', bg='red', command=lambda: tambahin_dong(create_barang(), root))

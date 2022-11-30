@@ -101,9 +101,13 @@ class editBarang:
         """
 
         def editin_dong(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan, root):
-            EditInformasi(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan)
-            messagebox.showinfo(title="Edit Berhasil", message="Berhasil menyimpan perubahan informasi barang ke database.")
-            root.destroy()
+            if (Kuantitas < 0):
+                messagebox.showinfo(title="Edit Barang Gagal", message="Masukan jumlah barang Anda tidak valid! Silahkan input jumlah yang valid (>= 0)")
+                root.destroy()
+            else:
+                EditInformasi(ID_Barang, Harga, Kuantitas, Supplier, Penyimpanan)
+                messagebox.showinfo(title="Edit Berhasil", message="Berhasil menyimpan perubahan informasi barang ke database.")
+                root.destroy()
 
         #Add Button
         self.addButton = Button(LeftFrame, padx=2, pady=2, font=('arial', 16, 'bold'), text='SAVE', bg='red', command=lambda: editin_dong(barang[1], productPrice.get(), productQuantity.get(), productSupplier.get(), productPlace.get(), root))
